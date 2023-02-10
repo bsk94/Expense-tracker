@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { routes } from '../../../router/routes';
 import { sidebarData } from '../../../helpers/sidebar';
+import Button from '../../atoms/button';
 
 const Navbar = () => {
   return (
@@ -33,7 +34,7 @@ const Navbar = () => {
         </StyledList>
         <StyledLogoutLink to={routes.login}>
           <StyledLogoutIcon alt="log out icon" />
-          <button>Log out</button>
+          <Button>Log out</Button>
         </StyledLogoutLink>
       </StyledNav>
     </>
