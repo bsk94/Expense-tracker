@@ -1,10 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import Electrolize from '../assets/fonts/Electrolize-Regular.ttf';
 import { media } from './mediaQueries';
+import styled from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-   * {
-        margin: 0;
+
+    *{
+        margin:0;
         padding: 0;
         box-sizing: border-box;
         text-decoration: none;
@@ -18,11 +20,7 @@ const GlobalStyle = createGlobalStyle`
     ul {
          list-style: none
     }
-
-    a {
-        text-decoration: none;
-    }
-
+    
     html { 
         font-size: 62.5%;
         ${media.mobile}{
@@ -30,16 +28,9 @@ const GlobalStyle = createGlobalStyle`
         }
     } 
 
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    /* Firefox */
-    input[type='number'] {
-      -moz-appearance: textfield;
+    body {
+        font-size: 1.6em; 
+        font-family: "Electrolize-Regular";
     }
 
     @font-face {
@@ -48,9 +39,22 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     font-style: normal;
     font-display: auto;
+    }
+
+`;
+
+export const StyledContainer = styled.div`
+  display: grid;
+  height: 100vh;
+  grid-template-columns: minmax(21rem, 13vw) auto;
+  grid-template-rows: 9rem auto;
+
+  ${media.mobile} {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8rem auto 8.7rem;
   }
-
-
 `;
 
 export default GlobalStyle;
