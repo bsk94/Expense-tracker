@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import Electrolize from '../assets/fonts/Electrolize-Regular.ttf';
+import { media } from './mediaQueries';
 
 const GlobalStyle = createGlobalStyle`
    * {
@@ -24,10 +25,10 @@ const GlobalStyle = createGlobalStyle`
 
     html { 
         font-size: 62.5%;
-         @media screen and (max-width: 600px){
+        ${media.mobile}{
         font-size: 50%;
         }
-    }  
+    } 
 
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
