@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import Electrolize from '../assets/fonts/Electrolize-Regular.ttf';
-import styled from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
    * {
@@ -52,3 +51,5 @@ const GlobalStyle = createGlobalStyle`
 
 
 `;
+
+export default GlobalStyle;
