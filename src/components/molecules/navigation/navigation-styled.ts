@@ -129,6 +129,5 @@ export const StyledLogoutLinkMobile = styled(Link)`
     border: 0;
     background: none;
     font-size: 2.1rem;
-    margin-top: 0.5rem;
   }
 `;
