@@ -10,4 +10,9 @@ export const StyledButton = styled.button`
   :disabled {
     opacity: 0.3;
   }
+
+  &.notFound__btn--goBack {
+    background-color: ${({ theme }) => theme.colors.neonOrange};
+    padding: 0rem 2rem;
+  }
 `;

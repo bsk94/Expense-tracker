@@ -12,14 +12,61 @@ import { routes } from './routes';
 const Router = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
-        <Route path={routes.overview} element={<OverviewView />} />
-        <Route path={routes.addExpense} element={<ExpenseView />} />
-        <Route path={routes.addRevenue} element={<RevenueView />} />
-        <Route path={routes.statistics} element={<StatisticView />} />
-        <Route path={routes.goal} element={<GoalView />} />
-        <Route path={routes.editPage} element={<EditExpRevView />} />
+        <Route
+          path={routes.overview}
+          element={
+            <>
+              <Navbar />
+              <OverviewView />
+            </>
+          }
+        />
+        <Route
+          path={routes.addExpense}
+          element={
+            <>
+              <Navbar />
+              <ExpenseView />
+            </>
+          }
+        />
+        <Route
+          path={routes.addRevenue}
+          element={
+            <>
+              <Navbar />
+              <RevenueView />
+            </>
+          }
+        />
+        <Route
+          path={routes.statistics}
+          element={
+            <>
+              <Navbar />
+              <StatisticView />
+            </>
+          }
+        />
+        <Route
+          path={routes.goal}
+          element={
+            <>
+              <Navbar />
+              <GoalView />
+            </>
+          }
+        />
+        <Route
+          path={routes.editPage}
+          element={
+            <>
+              <Navbar />
+              <EditExpRevView />
+            </>
+          }
+        />
         <Route path="*" element={<NotFoundView />} />
       </Routes>
     </BrowserRouter>
