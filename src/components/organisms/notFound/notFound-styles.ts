@@ -13,6 +13,6 @@ export const StyledContainer = styled.div`
     opacity: 0.6;
   }
   p {
-    margin: 4rem 10vw;
+    margin: 1rem 10vw 6rem 10vw;
   }
 `;
