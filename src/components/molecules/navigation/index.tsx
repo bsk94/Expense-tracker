@@ -14,9 +14,11 @@ import { routes } from '../../../router/routes';
 import { sidebarData } from '../../../helpers/sidebar';
 import Button from '../../atoms/button';
 import { useIsDesktop } from '../../../shared/hooks/isDesktop';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { isDesktop } = useIsDesktop();
+  const location = useLocation();
 
   return (
     <>
@@ -31,7 +33,7 @@ const Navbar = () => {
               {sidebarData.map(({ icon, title, link }) => {
                 return (
                   <Link to={link} key={title}>
-                    <StyledListItem>
+                    <StyledListItem className={location.pathname === link ? 'active' : ''}>
                       <img src={icon} alt={icon} />
                       <p>{title}</p>
                     </StyledListItem>
