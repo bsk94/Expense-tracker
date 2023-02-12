@@ -15,4 +15,9 @@ export const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.colors.neonOrange};
     padding: 0rem 2rem;
   }
+
+  &.formRev__btn--add {
+    width: 12rem;
+    margin-top: 15vh;
+  }
 `;

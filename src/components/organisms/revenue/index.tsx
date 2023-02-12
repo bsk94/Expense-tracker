@@ -51,7 +51,9 @@ const AddRevenue = () => {
                 amount
               </Input>
               <FormError name="amount" />
-              <Button type="submit">Add</Button>
+              <Button type="submit" className="formRev__btn--add">
+                Add
+              </Button>
             </StyledForm>
           </>
         )}
