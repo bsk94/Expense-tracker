@@ -1,5 +1,5 @@
 import React, { HTMLInputTypeAttribute } from 'react';
-import { StyledInput, StyledContainer } from './input-styles';
+import { StyledInput, StyledContainer, StyledLabel } from './input-styles';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -7,9 +7,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   placeholder: string;
+  children: string;
 }
 
-const Input: React.FC<InputProps> = ({ type, name, value, onChange, placeholder }) => {
+const Input: React.FC<InputProps> = ({ type, name, value, onChange, placeholder, children }) => {
   return (
     <StyledContainer>
       <StyledInput
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps> = ({ type, name, value, onChange, placeholder 
         onChange={onChange}
         placeholder={placeholder}
       />
+      <StyledLabel htmlFor={name}>{children}</StyledLabel>
     </StyledContainer>
   );
 };
