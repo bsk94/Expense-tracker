@@ -1,9 +1,12 @@
 import { Formik, Form } from 'formik';
 import Input from '../../atoms/input';
 import Button from '../../atoms/button';
+import { StyledForm } from '../../../shared/styles';
+import { RevenueItem } from '../../../shared/types';
+import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 
 const AddRevenue = () => {
-  const initialValues = {
+  const initialValues: RevenueItem = {
     name: '',
     date: '',
     amount: ''
@@ -12,12 +15,13 @@ const AddRevenue = () => {
     <>
       <Formik
         initialValues={initialValues}
+        validationSchema={addRevExpValidationSchema}
         onSubmit={(values) => {
           console.log(values);
         }}>
         {({ values, handleChange }) => (
           <>
-            <Form>
+            <StyledForm>
               <h2>+ Add revenue</h2>
               <Input
                 type="text"
@@ -27,9 +31,8 @@ const AddRevenue = () => {
                 placeholder=" ">
                 name
               </Input>
-
               <Input
-                type="text"
+                type="date"
                 name="date"
                 onChange={handleChange}
                 value={values.date}
@@ -47,7 +50,7 @@ const AddRevenue = () => {
               </Input>
 
               <Button type="submit">Add</Button>
-            </Form>
+            </StyledForm>
           </>
         )}
       </Formik>
