@@ -4,6 +4,7 @@ import Button from '../../atoms/button';
 import { StyledForm } from '../../../shared/styles';
 import { RevenueItem } from '../../../shared/types';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
+import FormError from '../../atoms/formError';
 
 const AddRevenue = () => {
   const initialValues: RevenueItem = {
@@ -31,6 +32,7 @@ const AddRevenue = () => {
                 placeholder=" ">
                 name
               </Input>
+              <FormError name="name" />
               <Input
                 type="date"
                 name="date"
@@ -39,7 +41,7 @@ const AddRevenue = () => {
                 placeholder=" ">
                 date
               </Input>
-
+              <FormError name="date" />
               <Input
                 type="number"
                 name="amount"
@@ -48,7 +50,7 @@ const AddRevenue = () => {
                 placeholder=" ">
                 amount
               </Input>
-
+              <FormError name="amount" />
               <Button type="submit">Add</Button>
             </StyledForm>
           </>
