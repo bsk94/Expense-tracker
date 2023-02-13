@@ -1,15 +1,20 @@
+import { useState } from 'react';
 import Button from '../../atoms/button';
 import Input from '../../atoms/input';
 import FormError from '../../atoms/formError';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import { StyledForm } from '../../../shared/styles';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
+import Category from '../../molecules/formCategory';
 
 const AddExpense = () => {
+  const [chosen, setChosen] = useState('');
+
   const initialValues = {
     name: '',
     date: '',
-    amount: ''
+    amount: '',
+    expenseCategory: chosen
   };
   return (
     <>
@@ -50,6 +55,7 @@ const AddExpense = () => {
                 amount
               </Input>
               <FormError name="amount" />
+              <Field name="expCat" component={Category} chosen={chosen} setChosen={setChosen} />
               <Button type="submit" className="formRev__btn--add">
                 Add
               </Button>
