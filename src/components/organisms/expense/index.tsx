@@ -56,7 +56,7 @@ const AddExpense = () => {
               </Input>
               <FormError name="amount" />
               <Field name="expCat" component={Category} chosen={chosen} setChosen={setChosen} />
-              <Button type="submit" className="formRev__btn--add">
+              <Button type="submit" className="formExp__btn--add">
                 Add
               </Button>
             </StyledForm>

@@ -16,6 +16,11 @@ export const StyledButton = styled.button`
     padding: 0rem 2rem;
   }
 
+  &.formExp__btn--add {
+    width: 12rem;
+    margin-top: 5rem;
+  }
+
   &.formRev__btn--add {
     width: 12rem;
     margin-top: 15vh;
