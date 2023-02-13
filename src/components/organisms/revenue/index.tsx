@@ -1,13 +1,16 @@
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import Input from '../../atoms/input';
 import Button from '../../atoms/button';
 import { StyledForm } from '../../../shared/styles';
-import { RevenueItem } from '../../../shared/types';
+import { RevenueItem, InitialRevenue } from '../../../shared/types';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import FormError from '../../atoms/formError';
+import { usePostRevenue } from '../../../shared/hooks/revenue';
 
 const AddRevenue = () => {
-  const initialValues: RevenueItem = {
+  const { data, mutateAsync } = usePostRevenue();
+
+  const initialValues: InitialRevenue = {
     name: '',
     date: '',
     amount: ''
@@ -19,6 +22,10 @@ const AddRevenue = () => {
         validationSchema={addRevExpValidationSchema}
         onSubmit={(values) => {
           console.log(values);
+          mutateAsync({
+            ...values,
+            financeType: 'revenue'
+          } as RevenueItem);
         }}>
         {({ values, handleChange }) => (
           <>
