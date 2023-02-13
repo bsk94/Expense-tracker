@@ -6,16 +6,26 @@ import { Formik, Field } from 'formik';
 import { StyledForm } from '../../../shared/styles';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import Category from '../../molecules/formCategory';
+import { ExpenseItem, InitialExpense } from '../../../shared/types';
 
 const AddExpense = () => {
   const [chosen, setChosen] = useState('');
 
-  const initialValues = {
+  const initialValues: InitialExpense = {
     name: '',
     date: '',
     amount: '',
     expenseCategory: chosen
   };
+
+  function validateUsername(value: ExpenseItem) {
+    let error;
+    if (!value) {
+      error = 'Select category';
+    }
+    return error;
+  }
+
   return (
     <>
       <Formik
@@ -27,7 +37,7 @@ const AddExpense = () => {
         {({ values, handleChange }) => (
           <>
             <StyledForm>
-              <h2>+ Add revenue</h2>
+              <h2>+ Add expense</h2>
               <Input
                 type="text"
                 name="name"
@@ -55,7 +65,13 @@ const AddExpense = () => {
                 amount
               </Input>
               <FormError name="amount" />
-              <Field name="expCat" component={Category} chosen={chosen} setChosen={setChosen} />
+              <Field
+                name="expCat"
+                component={Category}
+                chosen={chosen}
+                setChosen={setChosen}
+                validate={validateUsername}
+              />
               <Button type="submit" className="formExp__btn--add">
                 Add
               </Button>
