@@ -7,9 +7,12 @@ import { StyledForm } from '../../../shared/styles';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
+import { usePostExpense } from '../../../shared/hooks/expense';
 
 const AddExpense = () => {
   const [chosen, setChosen] = useState('');
+
+  const { data, mutateAsync } = usePostExpense();
 
   const initialValues: InitialExpense = {
     name: '',
@@ -33,6 +36,10 @@ const AddExpense = () => {
         validationSchema={addRevExpValidationSchema}
         onSubmit={(values) => {
           console.log(values);
+          mutateAsync({
+            ...values,
+            financeType: 'expense'
+          } as ExpenseItem);
         }}>
         {({ values, handleChange }) => (
           <>
@@ -66,12 +73,13 @@ const AddExpense = () => {
               </Input>
               <FormError name="amount" />
               <Field
-                name="expCat"
+                name="expenseCategory"
                 component={Category}
                 chosen={chosen}
                 setChosen={setChosen}
                 validate={validateUsername}
               />
+              <FormError name="expenseCategory" />
               <Button type="submit" className="formExp__btn--add">
                 Add
               </Button>
