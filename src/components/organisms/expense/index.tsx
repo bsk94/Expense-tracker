@@ -8,6 +8,7 @@ import { addRevExpValidationSchema } from '../../../validation/financeFormSchema
 import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
 import { usePostExpense } from '../../../shared/hooks/expense';
+import { StyledInputs } from './expense-styles';
 
 const AddExpense = () => {
   const [chosen, setChosen] = useState('');
@@ -45,41 +46,45 @@ const AddExpense = () => {
           <>
             <StyledForm>
               <h2>+ Add expense</h2>
-              <Input
-                type="text"
-                name="name"
-                onChange={handleChange}
-                value={values.name}
-                placeholder=" ">
-                name
-              </Input>
-              <FormError name="name" />
-              <Input
-                type="date"
-                name="date"
-                onChange={handleChange}
-                value={values.date}
-                placeholder=" ">
-                date
-              </Input>
-              <FormError name="date" />
-              <Input
-                type="number"
-                name="amount"
-                onChange={handleChange}
-                value={values.amount}
-                placeholder=" ">
-                amount
-              </Input>
-              <FormError name="amount" />
-              <Field
-                name="expenseCategory"
-                component={Category}
-                chosen={chosen}
-                setChosen={setChosen}
-                validate={validateUsername}
-              />
-              <FormError name="expenseCategory" />
+              <StyledInputs>
+                <Input
+                  type="text"
+                  name="name"
+                  onChange={handleChange}
+                  value={values.name}
+                  placeholder=" ">
+                  name
+                </Input>
+                <FormError name="name" />
+                <Input
+                  type="date"
+                  name="date"
+                  onChange={handleChange}
+                  value={values.date}
+                  placeholder=" ">
+                  date
+                </Input>
+                <FormError name="date" />
+                <Input
+                  type="number"
+                  name="amount"
+                  onChange={handleChange}
+                  value={values.amount}
+                  placeholder=" ">
+                  amount
+                </Input>
+                <FormError name="amount" />
+              </StyledInputs>
+              <div>
+                <Field
+                  name="expenseCategory"
+                  component={Category}
+                  chosen={chosen}
+                  setChosen={setChosen}
+                  validate={validateUsername}
+                />
+                <FormError name="expenseCategory" className="formExp__div--error" />
+              </div>
               <Button type="submit" className="formExp__btn--add">
                 Add
               </Button>

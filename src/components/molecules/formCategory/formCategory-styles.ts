@@ -4,7 +4,7 @@ export const StyledIconList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 5rem 4rem 0rem 4rem;
+  margin: 0rem 4rem;
 `;
 
 export const StyledIconListItem = styled.li`

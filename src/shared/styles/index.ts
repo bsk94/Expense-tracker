@@ -4,13 +4,13 @@ import { media } from '../../globalStyles/mediaQueries';
 
 export const StyledForm = styled(Form)`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
 
   h2 {
     align-self: flex-start;
-    margin: 0rem 0rem 4rem 7vw;
+    margin-left: 7vw;
   }
 
   ${media.mobile} {

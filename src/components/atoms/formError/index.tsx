@@ -1,14 +1,16 @@
 import React from 'react';
 import { ErrorMessage } from 'formik';
+import { StyledError } from './formError-styles';
 
 interface ErrorProps {
   name: string;
+  className?: string;
 }
 
-const FormError: React.FC<ErrorProps> = ({ name }) => {
+const FormError: React.FC<ErrorProps> = ({ name, className }) => {
   return (
     <ErrorMessage name={name}>
-      {(msg) => <div style={{ color: 'red', marginBottom: '-1.9rem' }}>{msg}</div>}
+      {(msg) => <StyledError className={className}>{msg}</StyledError>}
     </ErrorMessage>
   );
 };

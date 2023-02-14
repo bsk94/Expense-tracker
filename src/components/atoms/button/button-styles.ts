@@ -18,11 +18,11 @@ export const StyledButton = styled.button`
 
   &.formExp__btn--add {
     width: 12rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
   }
 
   &.formRev__btn--add {
     width: 12rem;
-    margin-top: 15vh;
+    margin-top: 3vh;
   }
 `;

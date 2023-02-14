@@ -36,8 +36,6 @@ export const StyledInput = styled.input`
 
 export const StyledContainer = styled.div`
   position: relative;
-  width: 70%;
-  max-width: 45rem;
 `;
 
 export const StyledLabel = styled.label`
