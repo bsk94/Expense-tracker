@@ -1,7 +1,13 @@
 import React from 'react';
+import TotalBalance from '../../molecules/totalBalance';
+import { StyledOverviewContainer } from './overview-styled';
 
 const Overview = () => {
-  return <div>Overview</div>;
+  return (
+    <StyledOverviewContainer>
+      <TotalBalance />
+    </StyledOverviewContainer>
+  );
 };
 
 export default Overview;
