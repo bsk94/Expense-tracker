@@ -4,15 +4,10 @@ import { StyledError } from './formError-styles';
 
 interface ErrorProps {
   name: string;
-  className?: string;
 }
 
-const FormError: React.FC<ErrorProps> = ({ name, className }) => {
-  return (
-    <ErrorMessage name={name}>
-      {(msg) => <StyledError className={className}>{msg}</StyledError>}
-    </ErrorMessage>
-  );
+const FormError: React.FC<ErrorProps> = ({ name }) => {
+  return <ErrorMessage name={name}>{(msg) => <StyledError>{msg}</StyledError>}</ErrorMessage>;
 };
 
 export default FormError;

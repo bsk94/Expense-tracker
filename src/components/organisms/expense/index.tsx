@@ -8,7 +8,7 @@ import { addRevExpValidationSchema } from '../../../validation/financeFormSchema
 import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
 import { usePostExpense } from '../../../shared/hooks/expense';
-import { StyledInputs } from './expense-styles';
+import { StyledInputs, StyleCategory } from './expense-styles';
 
 const AddExpense = () => {
   const [chosen, setChosen] = useState('');
@@ -75,7 +75,7 @@ const AddExpense = () => {
                 </Input>
                 <FormError name="amount" />
               </StyledInputs>
-              <div>
+              <StyleCategory>
                 <Field
                   name="expenseCategory"
                   component={Category}
@@ -83,8 +83,8 @@ const AddExpense = () => {
                   setChosen={setChosen}
                   validate={validateUsername}
                 />
-                <FormError name="expenseCategory" className="formExp__div--error" />
-              </div>
+                <FormError name="expenseCategory" />
+              </StyleCategory>
               <Button type="submit" className="formExp__btn--add">
                 Add
               </Button>
