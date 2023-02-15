@@ -32,3 +32,5 @@ export const categoryForm: CategoryForm[] = [
     icon: Other
   }
 ];
+
+export const financeType: string[] = ['all', 'expense', 'revenue'];
