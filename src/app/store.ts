@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import financesSlice from '../features/financeSlice';
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    finance: financesSlice
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
