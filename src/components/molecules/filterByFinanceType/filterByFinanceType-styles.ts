@@ -18,6 +18,8 @@ export const StyledList = styled.ul`
     max-width: 20rem;
     width: 100%;
     margin: 0rem 0.1rem;
+    transition: background-color 0.2s;
+
     &.active {
       background-color: ${({ theme }) => theme.colors.lightest};
     }
