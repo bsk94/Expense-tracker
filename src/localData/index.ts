@@ -32,5 +32,19 @@ export const localData: BudgetItem[] = [
     financeType: 'expense',
     id: 'qwrfwERAWERWAWQ',
     name: 'Krzysztof'
+  },
+  {
+    amount: 5543,
+    date: '2023-12-07',
+    financeType: 'revenue',
+    id: 'aqRFW3RWAT',
+    name: 'Shoes'
+  },
+  {
+    amount: 246522,
+    date: '2023-01-05',
+    financeType: 'revenue',
+    id: 'wegedrshyrtsrestse',
+    name: 'Dinner'
   }
 ];
