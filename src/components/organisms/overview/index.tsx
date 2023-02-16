@@ -1,4 +1,4 @@
-import React from 'react';
+import BudgetList from '../../molecules/budgetList';
 import FilterByFinanceType from '../../molecules/filterByFinanceType';
 import TotalBalance from '../../molecules/totalBalance';
 import { StyledOverviewContainer } from './overview-styled';
@@ -8,6 +8,7 @@ const Overview = () => {
     <StyledOverviewContainer>
       <TotalBalance />
       <FilterByFinanceType />
+      <BudgetList />
     </StyledOverviewContainer>
   );
 };
