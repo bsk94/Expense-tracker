@@ -49,7 +49,10 @@ const BudgetListItem = ({
           </StyledAmountEditDelContainer>
         </StyledFinanceListItemDesktop>
       ) : (
-        <StyledFinanceListItem key={id} onClick={() => setShowEditDelete(!showEditDelete)}>
+        <StyledFinanceListItem
+          key={id}
+          showEditDelete={showEditDelete}
+          onClick={() => setShowEditDelete(!showEditDelete)}>
           <StyledLeftSideDataContainer>
             <img src={icon} />
             <StyledNameDateContainer>

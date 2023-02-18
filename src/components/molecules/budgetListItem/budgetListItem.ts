@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { media } from '../../../globalStyles/mediaQueries';
 
 export const StyledContainer = styled.div`
-  @media screen and (max-width: 600px) {
+  ${media.mobile} {
     background-color: ${({ theme }) => theme.colors.lightest};
     height: 100%;
   }
@@ -14,13 +15,20 @@ export const StyledList = styled.ul`
   align-items: center;
 `;
 
-export const StyledFinanceListItem = styled.li`
+export const StyledFinanceListItem = styled.li<{ showEditDelete?: boolean }>`
   background-color: ${({ theme }) => theme.colors.lightest};
   display: flex;
   justify-content: space-between;
   height: 5.5rem;
   margin: 1rem 0rem;
   width: 100%;
+  transition: transform 0.15s ease;
+
+  ${({ showEditDelete }) =>
+    showEditDelete &&
+    css`
+      transform: translateX(-3em);
+    `};
 `;
 
 export const StyledFinanceListItemDesktop = styled(StyledFinanceListItem)`
@@ -51,7 +59,7 @@ export const StyledEditDelete = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 4rem;
+  width: 3em;
 
   img {
     height: 1.8rem;
@@ -69,6 +77,7 @@ export const StyledNameDateContainer = styled.div`
 export const StyledAmountEditDelContainer = styled.div`
   display: flex;
   justify-content: space-around;
+
   span {
     white-space: nowrap;
     margin: 0.5rem 1.5rem 0rem 0rem;
