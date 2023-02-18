@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../../globalStyles/mediaQueries';
 
 export const StyledList = styled.ul`
   display: flex;
@@ -8,6 +9,11 @@ export const StyledList = styled.ul`
   max-width: 57rem;
   width: 100%;
   border-radius: 50px;
+
+  ${media.mobile} {
+    height: 2.8rem;
+  }
+
   li {
     display: flex;
     justify-content: center;
