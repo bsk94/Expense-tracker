@@ -1,7 +1,8 @@
 import React from 'react';
+import Statistics from '../../components/organisms/statistics';
 
 const StatisticView = () => {
-  return <div>StatisticView</div>;
+  return <Statistics />;
 };
 
 export default StatisticView;
