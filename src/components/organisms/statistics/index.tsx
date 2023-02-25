@@ -1,43 +1,78 @@
-import { color } from 'd3-color';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { theme } from '../../../globalStyles/colorScheme';
 import { StyledContainer } from './statistics-styles';
 import { useIsDesktop } from '../../../shared/hooks/isDesktop';
+import { ReactComponent as House } from '../../../assets/icons/house.svg';
+import { ReactComponent as Transport } from '../../../assets/icons/bus.svg';
+import { ReactComponent as Food } from '../../../assets/icons/silverware.svg';
+import { ReactComponent as Entertainment } from '../../../assets/icons/smily.svg';
+import { ReactComponent as Other } from '../../../assets/icons/pen.svg';
+
 import {
   StyledIconListItem,
   StyledIconList,
   StyledTextContainer,
   StyledCalendarIcon
 } from './statistics-styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SvgIcon from '../../atoms/svg';
-import { categoryForm } from '../../../helpers/category';
+
 import DatePickerModal from '../../atoms/datePicker';
+import { localData } from '../../../localData';
 
 const Statistics = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const data = [
-    { name: 'Home', value: 400, color: theme.colors.blue },
-    { name: 'Food', value: 200, color: theme.colors.pink },
-    { name: 'Entertainment', value: 600, color: theme.colors.orange },
-    { name: 'Transport', value: 1200, color: theme.colors.yellow },
-    { name: 'Other', value: 700, color: theme.colors.green }
-  ];
-
   const { isDesktop } = useIsDesktop();
+
+  const data = [
+    { name: 'Home', value: 0, color: theme.colors.blue, icon: House },
+    { name: 'Food', value: 0, color: theme.colors.pink, icon: Food },
+    { name: 'Entertainment', value: 0, color: theme.colors.orange, icon: Entertainment },
+    { name: 'Transport', value: 0, color: theme.colors.yellow, icon: Transport },
+    { name: 'Other', value: 0, color: theme.colors.green, icon: Other }
+  ];
+  const [filterData, useFilterData] = useState(localData);
+
+  const filterDate = (dates: any) => {
+    const [startDate, endDate] = dates;
+    const resultProductData = localData.filter((item: any) => {
+      const itemDate = new Date(item.date);
+      console.log(itemDate);
+      return itemDate >= startDate && itemDate <= endDate;
+    });
+    useFilterData(resultProductData);
+    console.log(filterData);
+  };
+
+  (function () {
+    return data.forEach((element: any) => {
+      const currentCategory = element.name;
+      filterData.forEach((item) => {
+        if (item.expCat === currentCategory) {
+          element.value += item.amount;
+        }
+      });
+    });
+  })();
 
   return (
     <>
       <DatePickerModal
         selectRange={true}
-        onChange={(e: any) => console.log(e)}
+        onChange={(e: any) => filterDate(e)}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />
       <StyledContainer>
         <ResponsiveContainer height="55%" width="100%">
           <PieChart data={data}>
-            <Pie dataKey="value" data={data} cx="50%" cy="55%" innerRadius={60} stroke="none">
+            <Pie
+              dataKey="value"
+              data={data}
+              cx="50%"
+              cy="55%"
+              innerRadius={isDesktop ? 60 : 45}
+              stroke="none">
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
@@ -54,13 +89,13 @@ const Statistics = () => {
         </ResponsiveContainer>{' '}
         <StyledIconList>
           <StyledCalendarIcon onClick={() => setIsModalOpen(true)} alt="calendar icon" />
-          {categoryForm.map(({ cat, icon }) => {
+          {data.map(({ name, value, icon }) => {
             return (
-              <StyledIconListItem key={cat}>
+              <StyledIconListItem key={name}>
                 <SvgIcon Icon={icon} width={isDesktop ? 55 : 42} />
                 <StyledTextContainer>
-                  <span>{cat}</span>
-                  <span>2000$</span>
+                  <span>{name}</span>
+                  <span>{value} $</span>
                 </StyledTextContainer>
               </StyledIconListItem>
             );

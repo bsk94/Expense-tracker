@@ -6,7 +6,7 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   height: 100%;
   width: 100%;
   ${media.mobile} {
@@ -38,10 +38,11 @@ export const StyledIconList = styled.ul`
 export const StyledIconListItem = styled.li`
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 1rem;
 `;
 
-export const StyledTextContainer = styled.div`
+export const StyledTextContainer = styled.ul`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
@@ -53,4 +54,7 @@ export const StyledCalendarIcon = styled.img.attrs({
   align-self: flex-start;
   grid-column: 1 / span 2;
   padding: 1.5rem;
+  ${media.mobileS} {
+    padding: 0.5rem 0rem 0.5rem 1.5rem;
+  }
 `;
