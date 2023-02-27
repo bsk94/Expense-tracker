@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from '../../../globalStyles/mediaQueries';
-import CalendarIcon from '../../../assets/icons/calendar-line.svg';
+import CalendarIcon from '../../../assets/icons/calendar-big.svg';
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -9,6 +9,7 @@ export const StyledContainer = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
+
   ${media.mobile} {
     background-color: ${({ theme }) => theme.colors.lightest};
   }
@@ -52,9 +53,9 @@ export const StyledCalendarIcon = styled.img.attrs({
   src: `${CalendarIcon}`
 })`
   align-self: flex-start;
-  grid-column: 1 / span 2;
-  padding: 1.5rem;
-  ${media.mobileS} {
-    padding: 0.5rem 0rem 0.5rem 1.5rem;
+  margin-left: 1.5rem;
+  margin-bottom: -4rem;
+  ${media.mobile} {
+    margin-bottom: -10rem;
   }
 `;

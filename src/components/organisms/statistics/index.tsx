@@ -64,6 +64,7 @@ const Statistics = () => {
         setIsModalOpen={setIsModalOpen}
       />
       <StyledContainer>
+        <StyledCalendarIcon onClick={() => setIsModalOpen(true)} alt="calendar icon" />
         <ResponsiveContainer height="55%" width="100%">
           <PieChart data={data}>
             <Pie
@@ -88,7 +89,6 @@ const Statistics = () => {
           </PieChart>
         </ResponsiveContainer>{' '}
         <StyledIconList>
-          <StyledCalendarIcon onClick={() => setIsModalOpen(true)} alt="calendar icon" />
           {data.map(({ name, value, icon }) => {
             return (
               <StyledIconListItem key={name}>
