@@ -25,4 +25,9 @@ export const StyledButton = styled.button`
     width: 12rem;
     margin-top: 3vh;
   }
+
+  &.formLogin__btn--login {
+    width: 22rem;
+    margin-top: 3vh;
+  }
 `;

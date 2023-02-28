@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from '../components/molecules/navigation';
+import Login from '../components/organisms/login';
 import EditExpRevView from '../views/editExpRevView';
 import ExpenseView from '../views/expenseView';
 import GoalView from '../views/goalView';
@@ -13,6 +14,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path={routes.login} element={<Login />} />
         <Route
           path={routes.overview}
           element={
