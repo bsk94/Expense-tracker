@@ -1,5 +1,4 @@
 import { Formik } from 'formik';
-import { loginValidationSchema } from '../../../validation/loginFormSchema';
 import Button from '../../atoms/button';
 import FormError from '../../atoms/formError';
 import Input from '../../atoms/input';
@@ -9,30 +8,44 @@ import {
   StyledForm,
   StyledRegisterWrapper,
   StyledLink
-} from './login-styles';
+} from './register-styles';
 import { routes } from '../../../router/routes';
+import { registerValidationSchema } from '../../../validation/registerFormSchema';
 
-const Login = () => {
+const Register = () => {
   interface LoginInitialValues {
+    name: string;
     email: string;
     password: string;
+    confirmPassword: string;
   }
   const initialValues: LoginInitialValues = {
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   };
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={loginValidationSchema}
+      validationSchema={registerValidationSchema}
       onSubmit={(values) => {
         console.log(values);
       }}>
       {({ values, handleChange }) => (
         <StyledContainer>
           <StyledForm>
-            <h1>Log in</h1>
+            <h1>Register</h1>
             <StyledInputs>
+              <Input
+                type="text"
+                name="name"
+                onChange={handleChange}
+                value={values.name}
+                placeholder=" ">
+                name
+              </Input>
+              <FormError name="name" />
               <Input
                 type="text"
                 name="email"
@@ -51,13 +64,22 @@ const Login = () => {
                 password
               </Input>
               <FormError name="password" />
+              <Input
+                type="password"
+                name="confirmPassword"
+                onChange={handleChange}
+                value={values.confirmPassword}
+                placeholder=" ">
+                confirm password
+              </Input>
+              <FormError name="confirmPassword" />
             </StyledInputs>
             <Button type="submit" className="formLogin__btn--login">
-              Login
+              Register
             </Button>
             <StyledRegisterWrapper>
-              <p>No account?</p>
-              <StyledLink to={routes.register}>Register</StyledLink>
+              <p>Already have an account?</p>
+              <StyledLink to={routes.login}>Log in</StyledLink>
             </StyledRegisterWrapper>
           </StyledForm>
         </StyledContainer>
@@ -66,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -6,6 +6,7 @@ interface Routes {
   goal: string;
   login: string;
   editPage: string;
+  register: string;
 }
 
 export const routes: Routes = {
@@ -15,5 +16,6 @@ export const routes: Routes = {
   statistics: '/statistics',
   goal: '/goal',
   login: '/login',
-  editPage: '/edit/id/:id'
+  editPage: '/edit/id/:id',
+  register: '/register'
 };
