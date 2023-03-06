@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_promise_router_1 = __importDefault(require("express-promise-router"));
-const finance_1 = __importDefault(require("./finance"));
+const controllers_1 = require("../controllers");
 const router = (0, express_promise_router_1.default)();
-router.use('/finance', finance_1.default);
+router.get('/', controllers_1.financeController.addFinance);
 exports.default = router;
