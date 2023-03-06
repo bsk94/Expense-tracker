@@ -9,9 +9,12 @@ import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
 import { usePostExpense } from '../../../shared/hooks/finance';
 import { StyledInputs, StyleCategory } from './expense-styles';
+import { useNavigate } from 'react-router';
 
 const AddExpense = () => {
   const [chosen, setChosen] = useState('');
+
+  const navigate = useNavigate();
 
   const { data, mutateAsync } = usePostExpense();
 
@@ -41,6 +44,7 @@ const AddExpense = () => {
             ...values,
             financeType: 'expense'
           } as ExpenseItem);
+          navigate('/');
         }}>
         {({ values, handleChange }) => (
           <>

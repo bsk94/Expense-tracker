@@ -7,9 +7,12 @@ import { addRevExpValidationSchema } from '../../../validation/financeFormSchema
 import FormError from '../../atoms/formError';
 import { usePostRevenue } from '../../../shared/hooks/finance';
 import { StyledInputs } from './revenue-styles';
+import { useNavigate } from 'react-router';
 
 const AddRevenue = () => {
   const { data, mutateAsync } = usePostRevenue();
+
+  const navigate = useNavigate();
 
   const initialValues: InitialRevenue = {
     name: '',
@@ -27,6 +30,7 @@ const AddRevenue = () => {
             ...values,
             financeType: 'revenue'
           } as RevenueItem);
+          navigate('/');
         }}>
         {({ values, handleChange }) => (
           <>
