@@ -10,5 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addFinance = void 0;
-const addFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+const services_1 = require("../services");
+const addFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const financeCreated = yield services_1.financeService.addFinance(req);
+        console.log('bbb', financeCreated);
+        return res.status(200).send({ data: financeCreated });
+    }
+    catch (err) {
+        return res.status(500).send(`Internal server error, ${err.message}`);
+    }
+});
 exports.addFinance = addFinance;

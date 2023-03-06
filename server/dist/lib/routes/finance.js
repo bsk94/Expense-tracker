@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_promise_router_1 = __importDefault(require("express-promise-router"));
 const controllers_1 = require("../controllers");
 const router = (0, express_promise_router_1.default)();
-router.get('/', controllers_1.financeController.addFinance);
+router.post('/finance', controllers_1.financeController.addFinance);
 exports.default = router;

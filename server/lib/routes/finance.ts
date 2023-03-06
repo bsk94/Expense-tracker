@@ -2,6 +2,6 @@ import createRouter from 'express-promise-router';
 import { financeController } from '../controllers';
 const router = createRouter();
 
-router.get('/', financeController.addFinance);
+router.post('/finance', financeController.addFinance);
 
 export default router;

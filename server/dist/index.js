@@ -38,10 +38,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const routes_1 = __importDefault(require("./lib/routes"));
 const app = (0, express_1.default)();
 const port = 4000;
 const serv = require('http').createServer(app);
 dotenv.config();
+app.use((0, cors_1.default)({ origin: '*' }));
+app.use(body_parser_1.default.urlencoded({ extended: true }));
+app.use(body_parser_1.default.json());
+app.use(routes_1.default);
 app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     const db = yield mongoose_1.default.connect(`${process.env.DATABASE_CONNECTION}`);
     console.log(`Server is running ${port}`);

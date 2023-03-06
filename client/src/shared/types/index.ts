@@ -18,6 +18,13 @@ export interface InitialExpense {
 export interface ExpenseItem extends InitialExpense {
   financeType: 'expense';
 }
+export interface FinanceItem {
+  name: string;
+  date: string;
+  amount: number;
+  financeType: 'expense' | 'revenue';
+  expCat?: 'Home' | 'Entertainment' | 'Food' | 'Transport' | 'Other';
+}
 
 export interface BudgetItem {
   name: string;

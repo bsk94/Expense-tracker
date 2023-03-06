@@ -7,7 +7,7 @@ import { StyledForm } from '../../../shared/styles';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
-import { usePostExpense } from '../../../shared/hooks/expense';
+import { usePostExpense } from '../../../shared/hooks/finance';
 import { StyledInputs, StyleCategory } from './expense-styles';
 
 const AddExpense = () => {

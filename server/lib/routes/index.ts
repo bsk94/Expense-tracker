@@ -3,6 +3,6 @@ import financeRoutes from './finance';
 
 const router = createRouter();
 
-router.use('/finance', financeRoutes);
+router.use('/', financeRoutes);
 
 export default router;
