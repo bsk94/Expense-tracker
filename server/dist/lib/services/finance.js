@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addFinance = void 0;
+exports.getFinance = exports.addFinance = void 0;
 const Finance_1 = require("../models/Finance");
 const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('aaa', req.body);
@@ -24,3 +24,13 @@ const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     return {};
 });
 exports.addFinance = addFinance;
+const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const finance = yield Finance_1.FinanceModel.find();
+    if (!finance) {
+        throw Error('Error while fetching expenses from database');
+    }
+    else {
+        return finance;
+    }
+});
+exports.getFinance = getFinance;

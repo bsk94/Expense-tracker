@@ -10,3 +10,15 @@ export const addFinance = async (req: Request, res: Response) => {
     return res.status(500).send(`Internal server error, ${err.message}`);
   }
 };
+
+export const getFinance = async (req: Request, res: Response) => {
+  try {
+    const finance = await financeService.getFinance(req);
+
+    return res.status(200).send(finance);
+  } catch (err: any) {
+    return res
+      .status(500)
+      .send('Internal server error, please contact support');
+  }
+};

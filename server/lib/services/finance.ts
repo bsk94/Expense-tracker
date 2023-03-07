@@ -25,3 +25,13 @@ export const addFinance = async (req: Request) => {
 
   return {} as Finance;
 };
+
+export const getFinance = async (req: Request) => {
+  const finance = await FinanceModel.find();
+
+  if (!finance) {
+    throw Error('Error while fetching expenses from database');
+  } else {
+    return finance;
+  }
+};

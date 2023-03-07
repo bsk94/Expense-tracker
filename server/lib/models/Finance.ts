@@ -8,10 +8,10 @@ const financeSchema = new mongoose.Schema({
     maxLength: [100, 'Maximum length of the name is 100 characters'],
   },
   date: {
-    type: Date,
+    type: String,
     required: [true, 'Please provide a date'],
-    min: '01/01/2022',
-    max: new Date(),
+    // min: '01/01/2022',
+    // max: new Date(),
   },
   amount: {
     type: Number,

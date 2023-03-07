@@ -7,7 +7,7 @@ import { StyledForm } from '../../../shared/styles';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
-import { usePostExpense } from '../../../shared/hooks/finance';
+import { usePostExpense, useFinance } from '../../../shared/hooks/finance';
 import { StyledInputs, StyleCategory } from './expense-styles';
 import { useNavigate } from 'react-router';
 
@@ -16,7 +16,8 @@ const AddExpense = () => {
 
   const navigate = useNavigate();
 
-  const { data, mutateAsync } = usePostExpense();
+  const { mutateAsync } = usePostExpense();
+  const { refetch } = useFinance();
 
   const initialValues: InitialExpense = {
     name: '',
@@ -33,20 +34,23 @@ const AddExpense = () => {
     return error;
   }
 
+  const handleOnSubmit = async (values: InitialExpense) => {
+    console.log(values);
+    await mutateAsync({
+      ...values,
+      financeType: 'expense'
+    } as ExpenseItem);
+    refetch();
+    navigate('/');
+  };
+
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={addRevExpValidationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-          mutateAsync({
-            ...values,
-            financeType: 'expense'
-          } as ExpenseItem);
-          navigate('/');
-        }}>
-        {({ values, handleChange }) => (
+        onSubmit={handleOnSubmit}>
+        {({ values, handleChange, isSubmitting }) => (
           <>
             <StyledForm>
               <h2>+ Add expense</h2>
@@ -89,7 +93,7 @@ const AddExpense = () => {
                 />
                 <FormError name="expenseCategory" />
               </StyleCategory>
-              <Button type="submit" className="formExp__btn--add">
+              <Button type="submit" disabled={isSubmitting} className="formExp__btn--add">
                 Add
               </Button>
             </StyledForm>
