@@ -5,7 +5,7 @@ import { StyledForm } from '../../../shared/styles';
 import { RevenueItem, InitialRevenue } from '../../../shared/types';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import FormError from '../../atoms/formError';
-import { usePostRevenue, useFinance } from '../../../shared/hooks/finance';
+import { usePostRevenue } from '../../../shared/hooks/finance';
 import { StyledInputs } from './revenue-styles';
 import { useNavigate } from 'react-router';
 
@@ -13,7 +13,6 @@ const AddRevenue = () => {
   const { mutateAsync } = usePostRevenue();
 
   const navigate = useNavigate();
-  const { refetch } = useFinance();
 
   const initialValues: InitialRevenue = {
     name: '',
@@ -26,7 +25,6 @@ const AddRevenue = () => {
       ...values,
       financeType: 'revenue'
     } as RevenueItem);
-    refetch();
     navigate('/');
   };
 

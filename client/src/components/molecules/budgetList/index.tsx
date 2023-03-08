@@ -9,6 +9,7 @@ import other from '../../../assets/icons/pen.svg';
 import { BudgetItemList, BudgetItem } from '../../../shared/types';
 import { useIsDesktop } from '../../../shared/hooks/isDesktop';
 import { useFinance } from '../.././../shared/hooks/finance';
+import Skeleton from '../skeletonLoading';
 
 const categoryIcons: any = { food, home, entertainment, transport, other };
 
@@ -30,6 +31,10 @@ const BudgetList = () => {
       }
     });
   };
+
+  if (isLoading) {
+    return <Skeleton />;
+  }
 
   return (
     <>

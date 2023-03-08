@@ -7,7 +7,7 @@ import { StyledForm } from '../../../shared/styles';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import Category from '../../molecules/formCategory';
 import { ExpenseItem, InitialExpense } from '../../../shared/types';
-import { usePostExpense, useFinance } from '../../../shared/hooks/finance';
+import { usePostExpense } from '../../../shared/hooks/finance';
 import { StyledInputs, StyleCategory } from './expense-styles';
 import { useNavigate } from 'react-router';
 
@@ -17,7 +17,6 @@ const AddExpense = () => {
   const navigate = useNavigate();
 
   const { mutateAsync } = usePostExpense();
-  const { refetch } = useFinance();
 
   const initialValues: InitialExpense = {
     name: '',
@@ -35,12 +34,10 @@ const AddExpense = () => {
   }
 
   const handleOnSubmit = async (values: InitialExpense) => {
-    console.log(values);
     await mutateAsync({
       ...values,
       financeType: 'expense'
     } as ExpenseItem);
-    refetch();
     navigate('/');
   };
 
