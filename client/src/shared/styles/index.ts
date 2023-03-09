@@ -17,3 +17,12 @@ export const StyledForm = styled(Form)`
     background-color: ${({ theme }) => theme.colors.lightest};
   }
 `;
+
+export const StyledError = styled.h2`
+  color: ${({ theme }) => theme.colors.darkGreen};
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;

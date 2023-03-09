@@ -10,6 +10,7 @@ import { BudgetItemList, BudgetItem } from '../../../shared/types';
 import { useIsDesktop } from '../../../shared/hooks/isDesktop';
 import { useFinance } from '../.././../shared/hooks/finance';
 import Skeleton from '../skeletonLoading';
+import { StyledError } from '../../../shared/styles';
 
 const categoryIcons: any = { food, home, entertainment, transport, other };
 
@@ -34,6 +35,10 @@ const BudgetList = () => {
 
   if (isLoading) {
     return <Skeleton />;
+  }
+
+  if (isError) {
+    return <StyledError>Ooops! Something went wrong...</StyledError>;
   }
 
   return (
