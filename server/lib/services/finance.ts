@@ -27,11 +27,20 @@ export const addFinance = async (req: Request) => {
 };
 
 export const getFinance = async (req: Request) => {
-  const finance = await FinanceModel.find();
+  const page: number = Number(req.query.p) || 1;
+  const itemsPerPage: number = 4;
+
+  const finance = await FinanceModel.find()
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
+
+  const total = await FinanceModel.countDocuments();
+
+  const pages = Math.ceil(total / itemsPerPage);
 
   if (!finance) {
     throw Error('Error while fetching expenses from database');
   } else {
-    return finance;
+    return { finance, total, pages };
   }
 };

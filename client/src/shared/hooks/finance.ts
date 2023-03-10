@@ -21,11 +21,19 @@ export const usePostRevenue = () => {
   return { data, mutateAsync };
 };
 
-const fetchFinance = async () =>
-  await axios.get('http://localhost:4000/finance').then((resp) => resp.data);
+const fetchFinance = async (page: number) =>
+  await axios.get(`http://localhost:4000/finance?p=${page}`).then((resp) => resp.data);
 
-export const useFinance = () => {
-  const { data, isLoading, isError, refetch } = useQuery(['finance'], fetchFinance);
+export const useFinance = (page: number) => {
+  const { data, isLoading, isError, refetch } = useQuery(
+    ['finance', page],
+    () => fetchFinance(page),
+    { keepPreviousData: true }
+  );
 
-  return { data, isLoading, isError, refetch };
+  const financeData = data?.finance;
+  const totalFinanceNumber = data?.total;
+  const numberOfPages = data?.pages;
+
+  return { financeData, totalFinanceNumber, numberOfPages, isLoading, isError, refetch };
 };

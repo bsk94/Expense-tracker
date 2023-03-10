@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import arrowLeft from '../../../assets/icons/arrow-left.svg';
+import arrowRight from '../../../assets/icons/arrow-right.svg';
 
 export const StyledButton = styled.button`
   height: 3.8rem;
@@ -29,5 +31,14 @@ export const StyledButton = styled.button`
   &.formLogin__btn--login {
     width: 22rem;
     margin-top: 3vh;
+  }
+
+  &.pageDiv__btn--arrow {
+    background-color: ${({ theme }) => theme.colors.lightest};
+    border-radius: 0px;
+    height: 2.5rem;
+    width: 3rem;
+    font-size: 2.2rem;
+    color: ${({ theme }) => theme.colors.darkGreen};
   }
 `;

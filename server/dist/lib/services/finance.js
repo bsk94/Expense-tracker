@@ -25,12 +25,18 @@ const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.addFinance = addFinance;
 const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const finance = yield Finance_1.FinanceModel.find();
+    const page = Number(req.query.p) || 1;
+    const itemsPerPage = 4;
+    const finance = yield Finance_1.FinanceModel.find()
+        .skip((page - 1) * itemsPerPage)
+        .limit(itemsPerPage);
+    const total = yield Finance_1.FinanceModel.countDocuments();
+    const pages = Math.ceil(total / itemsPerPage);
     if (!finance) {
         throw Error('Error while fetching expenses from database');
     }
     else {
-        return finance;
+        return { finance, total, pages };
     }
 });
 exports.getFinance = getFinance;
