@@ -43,13 +43,13 @@ const BudgetList = () => {
   if (isError) {
     return <StyledError>Ooops! Something went wrong...</StyledError>;
   }
-
+  console.log(financeData);
   return (
     <>
       <StyledList>
         <StyledParagraf>Found {totalFinanceNumber} records</StyledParagraf>
         {addVisibilityAndIconToData(financeData)?.map((item) => (
-          <BudgetListItem key={item.id} isDesktop={isDesktop} item={item} />
+          <BudgetListItem key={item._id} isDesktop={isDesktop} page={page} item={item} />
         ))}
       </StyledList>
       <StyledPaginationWrapper>

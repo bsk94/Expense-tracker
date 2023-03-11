@@ -19,7 +19,7 @@ const EditExpenseRevenue = () => {
 
   const [chosen, setChosen] = useState<any>('');
 
-  const data = localData.find((item) => item.id === id);
+  const data = localData.find((item) => item._id === id);
   console.log('aaaa', data);
 
   const [initData, setInitData] = useState<any>({

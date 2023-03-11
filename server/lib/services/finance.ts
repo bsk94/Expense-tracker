@@ -44,3 +44,13 @@ export const getFinance = async (req: Request) => {
     return { finance, total, pages };
   }
 };
+
+export const deleteFinance = async (id: string) => {
+  const result = await FinanceModel.findByIdAndDelete(id);
+  console.log(result);
+  if (!result) {
+    throw new Error('Error while removing expenses from database');
+  } else {
+    return result;
+  }
+};

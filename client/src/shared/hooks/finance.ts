@@ -37,3 +37,12 @@ export const useFinance = (page: number) => {
 
   return { financeData, totalFinanceNumber, numberOfPages, isLoading, isError, refetch };
 };
+
+const deleteItem = async (id: string) =>
+  await axios.delete(`http://localhost:4000/finance/${id}`).then((res) => console.log(res.data));
+
+export const useDeleteFinance = () => {
+  const { mutateAsync } = useMutation(['finance'], deleteItem);
+
+  return { mutateAsync };
+};

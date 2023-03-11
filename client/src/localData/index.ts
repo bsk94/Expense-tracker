@@ -6,7 +6,7 @@ export const localData: BudgetItem[] = [
     date: '2023-02-03',
     expCat: 'Food',
     financeType: 'expense',
-    id: 'Br5pXYqLZmMmZikXG8lK',
+    _id: 'Br5pXYqLZmMmZikXG8lK',
     name: 'Anna'
   },
   {
@@ -14,7 +14,7 @@ export const localData: BudgetItem[] = [
     date: '2022-02-02',
     expCat: 'Other',
     financeType: 'expense',
-    id: 'wAT4EWATRDESERWYGAER',
+    _id: 'wAT4EWATRDESERWYGAER',
     name: 'Olek'
   },
   {
@@ -22,7 +22,7 @@ export const localData: BudgetItem[] = [
     date: '2023-11-11',
     expCat: 'Transport',
     financeType: 'expense',
-    id: 'RWAERWTRSAEW',
+    _id: 'RWAERWTRSAEW',
     name: 'Marta'
   },
   {
@@ -30,21 +30,21 @@ export const localData: BudgetItem[] = [
     date: '2023-07-07',
     expCat: 'Home',
     financeType: 'expense',
-    id: 'qwrfwERAWERWAWQ',
+    _id: 'qwrfwERAWERWAWQ',
     name: 'Krzysztof'
   },
   {
     amount: 5543,
     date: '2023-12-07',
     financeType: 'revenue',
-    id: 'aqRFW3RWAT',
+    _id: 'aqRFW3RWAT',
     name: 'Shoes'
   },
   {
     amount: 246522,
     date: '2023-01-05',
     financeType: 'revenue',
-    id: 'wegedrshyrtsrestse',
+    _id: 'wegedrshyrtsrestse',
     name: 'Dinner'
   }
 ];

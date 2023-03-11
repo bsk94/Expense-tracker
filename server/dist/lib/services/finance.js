@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFinance = exports.addFinance = void 0;
+exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
 const Finance_1 = require("../models/Finance");
 const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('aaa', req.body);
@@ -40,3 +40,14 @@ const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getFinance = getFinance;
+const deleteFinance = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield Finance_1.FinanceModel.findByIdAndDelete(id);
+    console.log(result);
+    if (!result) {
+        throw new Error('Error while removing expenses from database');
+    }
+    else {
+        return result;
+    }
+});
+exports.deleteFinance = deleteFinance;

@@ -22,3 +22,16 @@ export const getFinance = async (req: Request, res: Response) => {
       .send('Internal server error, please contact support');
   }
 };
+
+export const deleteFinance = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const expenses = await financeService.deleteFinance(id);
+
+    return res.status(200).send('User was found');
+  } catch (error: any) {
+    return res
+      .status(500)
+      .send('Internal server error, please contact support');
+  }
+};

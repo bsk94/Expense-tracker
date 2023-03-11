@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFinance = exports.addFinance = void 0;
+exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
 const services_1 = require("../services");
 const addFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -34,3 +34,16 @@ const getFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getFinance = getFinance;
+const deleteFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const expenses = yield services_1.financeService.deleteFinance(id);
+        return res.status(200).send('User was found');
+    }
+    catch (error) {
+        return res
+            .status(500)
+            .send('Internal server error, please contact support');
+    }
+});
+exports.deleteFinance = deleteFinance;

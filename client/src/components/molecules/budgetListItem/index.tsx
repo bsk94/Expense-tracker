@@ -12,17 +12,28 @@ import deleteIcon from '../../../assets/icons/trashbin.svg';
 import editIcon from '../../../assets/icons/edit icon.svg';
 import { BudgetItemList } from '../../../shared/types';
 import { useState } from 'react';
+import { useDeleteFinance, useFinance } from '../../../shared/hooks/finance';
 
 type OverviewProps = {
   item: BudgetItemList;
   isDesktop: boolean;
+  page: number;
 };
 
 const BudgetListItem = ({
-  item: { name, amount, date, id, icon, financeType },
-  isDesktop
+  item: { name, amount, date, _id: id, icon, financeType },
+  isDesktop,
+  page
 }: OverviewProps) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
+
+  const { mutateAsync } = useDeleteFinance();
+  const { refetch } = useFinance(page);
+
+  const handleDelete = async (id: string) => {
+    await mutateAsync(id);
+    refetch();
+  };
 
   return (
     <>
@@ -44,7 +55,7 @@ const BudgetListItem = ({
               <StyledLink to={`/edit/id/${id}`}>
                 <img src={editIcon} />
               </StyledLink>
-              <img src={deleteIcon} onClick={() => 'Hi!'} />
+              <img src={deleteIcon} onClick={() => handleDelete(id)} />
             </StyledEditDeleteDesktop>
           </StyledAmountEditDelContainer>
         </StyledFinanceListItemDesktop>
@@ -68,7 +79,7 @@ const BudgetListItem = ({
 
             {showEditDelete ? (
               <StyledEditDelete>
-                <img src={deleteIcon} onClick={() => 'hi!'} />
+                <img src={deleteIcon} onClick={() => handleDelete(id)} />
                 <StyledLink to={`/edit/id/${id}`}>
                   <img src={editIcon} />
                 </StyledLink>

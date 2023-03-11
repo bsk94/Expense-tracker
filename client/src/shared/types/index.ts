@@ -30,7 +30,7 @@ export interface BudgetItem {
   name: string;
   date: string;
   amount: number;
-  id: string;
+  _id: string;
   financeType: 'expense' | 'revenue';
   expCat?: 'Home' | 'Entertainment' | 'Food' | 'Transport' | 'Other';
 }
