@@ -32,7 +32,7 @@ export interface BudgetItem {
   amount: number;
   _id: string;
   financeType: 'expense' | 'revenue';
-  expCat?: 'Home' | 'Entertainment' | 'Food' | 'Transport' | 'Other';
+  expenseCategory?: 'Home' | 'Entertainment' | 'Food' | 'Transport' | 'Other';
 }
 
 export interface BudgetItemList extends BudgetItem {

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
+exports.updateFinance = exports.getSingleFinance = exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
 const Finance_1 = require("../models/Finance");
 const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('aaa', req.body);
@@ -51,3 +51,30 @@ const deleteFinance = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.deleteFinance = deleteFinance;
+const getSingleFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const finance = yield Finance_1.FinanceModel.findById(id);
+    if (!finance) {
+        throw Error('Error while fetching expenses from database');
+    }
+    else {
+        return finance;
+    }
+});
+exports.getSingleFinance = getSingleFinance;
+const updateFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!req.body) {
+        throw new Error('Data to update can not be empty!');
+    }
+    const id = req.body._id;
+    const result = yield Finance_1.FinanceModel.findByIdAndUpdate(id, req.body, {
+        new: true,
+    });
+    if (!result) {
+        throw new Error('Error while updating on database');
+    }
+    else {
+        return result;
+    }
+});
+exports.updateFinance = updateFinance;

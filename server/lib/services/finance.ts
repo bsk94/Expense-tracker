@@ -54,3 +54,33 @@ export const deleteFinance = async (id: string) => {
     return result;
   }
 };
+
+export const getSingleFinance = async (req: Request) => {
+  const id = req.params.id;
+
+  const finance = await FinanceModel.findById(id);
+
+  if (!finance) {
+    throw Error('Error while fetching expenses from database');
+  } else {
+    return finance;
+  }
+};
+
+export const updateFinance = async (req: Request) => {
+  if (!req.body) {
+    throw new Error('Data to update can not be empty!');
+  }
+
+  const id = req.body._id;
+
+  const result = await FinanceModel.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
+
+  if (!result) {
+    throw new Error('Error while updating on database');
+  } else {
+    return result;
+  }
+};

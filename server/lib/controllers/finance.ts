@@ -35,3 +35,27 @@ export const deleteFinance = async (req: Request, res: Response) => {
       .send('Internal server error, please contact support');
   }
 };
+
+export const getSingleFinance = async (req: Request, res: Response) => {
+  try {
+    const finance = await financeService.getSingleFinance(req);
+
+    return res.status(200).send(finance);
+  } catch (err: any) {
+    return res
+      .status(500)
+      .send('Internal server error, please contact support');
+  }
+};
+
+export const updateFinance = async (req: Request, res: Response) => {
+  try {
+    const financeitem = await financeService.updateFinance(req);
+    console.log('yyy', financeitem);
+    return res.status(200).send(financeitem);
+  } catch (error: any) {
+    return res
+      .status(500)
+      .send('Internal server error, please contact support at');
+  }
+};

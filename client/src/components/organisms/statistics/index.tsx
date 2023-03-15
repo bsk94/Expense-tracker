@@ -48,7 +48,7 @@ const Statistics = () => {
     return data.forEach((element: any) => {
       const currentCategory = element.name;
       filterData.forEach((item) => {
-        if (item.expCat === currentCategory) {
+        if (item.expenseCategory === currentCategory) {
           element.value += item.amount;
         }
       });

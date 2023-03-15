@@ -4,7 +4,7 @@ export const localData: BudgetItem[] = [
   {
     amount: 2000,
     date: '2023-02-03',
-    expCat: 'Food',
+    expenseCategory: 'Food',
     financeType: 'expense',
     _id: 'Br5pXYqLZmMmZikXG8lK',
     name: 'Anna'
@@ -12,7 +12,7 @@ export const localData: BudgetItem[] = [
   {
     amount: 12423,
     date: '2022-02-02',
-    expCat: 'Other',
+    expenseCategory: 'Other',
     financeType: 'expense',
     _id: 'wAT4EWATRDESERWYGAER',
     name: 'Olek'
@@ -20,7 +20,7 @@ export const localData: BudgetItem[] = [
   {
     amount: 23454,
     date: '2023-11-11',
-    expCat: 'Transport',
+    expenseCategory: 'Transport',
     financeType: 'expense',
     _id: 'RWAERWTRSAEW',
     name: 'Marta'
@@ -28,7 +28,7 @@ export const localData: BudgetItem[] = [
   {
     amount: 33224,
     date: '2023-07-07',
-    expCat: 'Home',
+    expenseCategory: 'Home',
     financeType: 'expense',
     _id: 'qwrfwERAWERWAWQ',
     name: 'Krzysztof'

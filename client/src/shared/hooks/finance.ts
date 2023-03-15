@@ -38,11 +38,28 @@ export const useFinance = (page: number) => {
   return { financeData, totalFinanceNumber, numberOfPages, isLoading, isError, refetch };
 };
 
-const deleteItem = async (id: string) =>
-  await axios.delete(`http://localhost:4000/finance/${id}`).then((res) => console.log(res.data));
+const deleteItem = async (id: string) => await axios.delete(`http://localhost:4000/finance/${id}`);
 
 export const useDeleteFinance = () => {
   const { mutateAsync } = useMutation(['finance'], deleteItem);
+
+  return { mutateAsync };
+};
+
+const fetchFinanceItem = async (id: string) =>
+  await axios.get(`http://localhost:4000/finance/${id}`).then((resp) => resp.data);
+
+export const useSingleFinance = (id: string) => {
+  const { data, isError } = useQuery(['finance', id], () => fetchFinanceItem(id));
+
+  return { data, isError };
+};
+
+const updateItem = async (payload: any) =>
+  await axios.patch(`http://localhost:4000/finance/${payload.id}`, payload);
+
+export const useUpdateFinance = () => {
+  const { mutateAsync } = useMutation(['finance'], updateItem);
 
   return { mutateAsync };
 };

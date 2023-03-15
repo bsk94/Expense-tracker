@@ -8,21 +8,21 @@ import FormError from '../../atoms/formError';
 import { addRevExpValidationSchema } from '../../../validation/financeFormSchema';
 import Category from '../../molecules/formCategory';
 import { StyledForm } from '../../../shared/styles';
-import { localData } from '../../../localData';
 import { BudgetItem, InitialRevenue } from '../../../shared/types';
 import { StyledInputs } from './editRevExp-styles';
+import { useSingleFinance, useUpdateFinance } from '../../../shared/hooks/finance';
 
 const EditExpenseRevenue = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const { data } = useSingleFinance(id as string);
+  const { mutateAsync } = useUpdateFinance();
+  console.log('aaa', data);
 
   const [chosen, setChosen] = useState<any>('');
 
-  const data = localData.find((item) => item._id === id);
-  console.log('aaaa', data);
-
-  const [initData, setInitData] = useState<any>({
+  const [initData, setInitData] = useState<InitialRevenue>({
     name: '',
     date: '',
     amount: ''
@@ -31,24 +31,24 @@ const EditExpenseRevenue = () => {
   useEffect(() => {
     if (id && data) {
       setInitData(data);
-      setChosen(data.expCat);
+      setChosen(data.expenseCategory);
     }
   }, [id, data]);
 
-  const initialValues = {
+  const initialValues: InitialRevenue = {
     name: initData.name,
     date: initData.date,
     amount: initData.amount
   };
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
-    if (values.expCat !== undefined) {
-      values.expCat = chosen;
-      ({ id, values });
+  const handleSubmit = async (values: any) => {
+    console.log('ggg', values);
+    if (values.expenseCategory !== undefined) {
+      values.expenseCategory = chosen;
+      await mutateAsync({ ...values, _id: id } as BudgetItem);
       navigate('/');
     } else {
-      ({ id, values });
+      await mutateAsync({ ...values, _id: id } as BudgetItem);
       navigate('/');
     }
   };
@@ -94,7 +94,7 @@ const EditExpenseRevenue = () => {
               </Input>
               <FormError name="amount" />
             </StyledInputs>
-            {data?.expCat !== undefined ? (
+            {data?.expenseCategory !== undefined ? (
               <Field name="category" component={Category} chosen={chosen} setChosen={setChosen} />
             ) : null}
             <Button type="submit" className="formExp__btn--add">
