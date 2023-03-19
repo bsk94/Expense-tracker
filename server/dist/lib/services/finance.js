@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.filterExpense = exports.updateFinance = exports.getSingleFinance = exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
 const Finance_1 = require("../models/Finance");
 const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('aaa', req.body);
     const newFinance = new Finance_1.FinanceModel({
         name: req.body.name,
         date: req.body.date,

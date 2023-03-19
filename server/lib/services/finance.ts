@@ -12,7 +12,6 @@ interface Finance {
 }
 
 export const addFinance = async (req: Request) => {
-  console.log('aaa', req.body);
   const newFinance = new FinanceModel({
     name: req.body.name,
     date: req.body.date,

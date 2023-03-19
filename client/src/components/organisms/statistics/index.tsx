@@ -36,10 +36,11 @@ const Statistics = () => {
   ]);
 
   itemList?.map((item: BudgetItem) => {
-    for (const [key, value] of valuesMap) {
-      if (key === item.expenseCategory) {
-        valuesMap.set(key, value + item.amount);
-      }
+    if (item.expenseCategory) {
+      valuesMap.set(
+        item.expenseCategory,
+        (valuesMap.get(item.expenseCategory) as number) + item.amount
+      );
     }
   });
 

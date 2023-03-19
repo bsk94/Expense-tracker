@@ -43,7 +43,7 @@ const BudgetList = () => {
   if (isError) {
     return <StyledError>Ooops! Something went wrong...</StyledError>;
   }
-  console.log(financeData);
+
   return (
     <>
       <StyledList>
