@@ -9,12 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateFinance = exports.getSingleFinance = exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
+exports.filterExpense = exports.updateFinance = exports.getSingleFinance = exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
 const services_1 = require("../services");
 const addFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const financeCreated = yield services_1.financeService.addFinance(req);
-        console.log('bbb', financeCreated);
         return res.status(200).send({ data: financeCreated });
     }
     catch (err) {
@@ -72,3 +71,15 @@ const updateFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.updateFinance = updateFinance;
+const filterExpense = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const finance = yield services_1.financeService.filterExpense(req);
+        return res.status(200).send(finance);
+    }
+    catch (err) {
+        return res
+            .status(500)
+            .send('Internal server error, please contact support');
+    }
+});
+exports.filterExpense = filterExpense;

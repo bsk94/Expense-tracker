@@ -58,4 +58,5 @@ export const StyledCalendarIcon = styled.img.attrs({
   ${media.mobile} {
     margin-bottom: -10rem;
   }
+  z-index: 1;
 `;

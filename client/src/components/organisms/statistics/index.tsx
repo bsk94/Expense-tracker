@@ -7,6 +7,8 @@ import { ReactComponent as Transport } from '../../../assets/icons/bus.svg';
 import { ReactComponent as Food } from '../../../assets/icons/silverware.svg';
 import { ReactComponent as Entertainment } from '../../../assets/icons/smily.svg';
 import { ReactComponent as Other } from '../../../assets/icons/pen.svg';
+import { useFinanceStatistics } from '../../../shared/hooks/finance';
+import { BudgetItem } from '../../../shared/types';
 
 import {
   StyledIconListItem,
@@ -14,52 +16,56 @@ import {
   StyledTextContainer,
   StyledCalendarIcon
 } from './statistics-styles';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import SvgIcon from '../../atoms/svg';
-
 import DatePickerModal from '../../atoms/datePicker';
-import { localData } from '../../../localData';
 
 const Statistics = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { isDesktop } = useIsDesktop();
 
+  const [dates, useDates] = useState('');
+  const { data: itemList } = useFinanceStatistics(dates);
+
+  const valuesMap = new Map([
+    ['Home', 0],
+    ['Food', 0],
+    ['Entertainment', 0],
+    ['Transport', 0],
+    ['Other', 0]
+  ]);
+
+  itemList?.map((item: BudgetItem) => {
+    for (const [key, value] of valuesMap) {
+      if (key === item.expenseCategory) {
+        valuesMap.set(key, value + item.amount);
+      }
+    }
+  });
+
   const data = [
-    { name: 'Home', value: 0, color: theme.colors.blue, icon: House },
-    { name: 'Food', value: 0, color: theme.colors.pink, icon: Food },
-    { name: 'Entertainment', value: 0, color: theme.colors.orange, icon: Entertainment },
-    { name: 'Transport', value: 0, color: theme.colors.yellow, icon: Transport },
-    { name: 'Other', value: 0, color: theme.colors.green, icon: Other }
+    { name: 'Home', value: valuesMap.get('Home'), color: theme.colors.blue, icon: House },
+    { name: 'Food', value: valuesMap.get('Food'), color: theme.colors.pink, icon: Food },
+    {
+      name: 'Entertainment',
+      value: valuesMap.get('Entertainment'),
+      color: theme.colors.orange,
+      icon: Entertainment
+    },
+    {
+      name: 'Transport',
+      value: valuesMap.get('Transport'),
+      color: theme.colors.yellow,
+      icon: Transport
+    },
+    { name: 'Other', value: valuesMap.get('Other'), color: theme.colors.green, icon: Other }
   ];
-  const [filterData, useFilterData] = useState(localData);
-
-  const filterDate = (dates: any) => {
-    const [startDate, endDate] = dates;
-    const resultProductData = localData.filter((item: any) => {
-      const itemDate = new Date(item.date);
-      console.log(itemDate);
-      return itemDate >= startDate && itemDate <= endDate;
-    });
-    useFilterData(resultProductData);
-    console.log(filterData);
-  };
-
-  (function () {
-    return data.forEach((element: any) => {
-      const currentCategory = element.name;
-      filterData.forEach((item) => {
-        if (item.expenseCategory === currentCategory) {
-          element.value += item.amount;
-        }
-      });
-    });
-  })();
 
   return (
     <>
       <DatePickerModal
         selectRange={true}
-        onChange={(e: any) => filterDate(e)}
+        onChange={(e: any) => useDates(e)}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />

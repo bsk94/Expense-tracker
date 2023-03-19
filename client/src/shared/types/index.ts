@@ -23,7 +23,7 @@ export interface FinanceItem {
   date: string;
   amount: number;
   financeType: 'expense' | 'revenue';
-  expCat?: 'Home' | 'Entertainment' | 'Food' | 'Transport' | 'Other';
+  expenseCategory?: 'Home' | 'Entertainment' | 'Food' | 'Transport' | 'Other';
 }
 
 export interface BudgetItem {

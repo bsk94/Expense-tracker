@@ -63,3 +63,12 @@ export const useUpdateFinance = () => {
 
   return { mutateAsync };
 };
+
+const fetchFinanceStatistics = async (dates: string) =>
+  await axios.get(`http://localhost:4000/finance/expense/${dates}`).then((resp) => resp.data);
+
+export const useFinanceStatistics = (dates: string) => {
+  const { data } = useQuery(['finance', dates], () => fetchFinanceStatistics(dates));
+
+  return { data };
+};

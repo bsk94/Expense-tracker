@@ -4,7 +4,7 @@ import { financeService } from '../services';
 export const addFinance = async (req: Request, res: Response) => {
   try {
     const financeCreated = await financeService.addFinance(req);
-    console.log('bbb', financeCreated);
+
     return res.status(200).send({ data: financeCreated });
   } catch (err: any) {
     return res.status(500).send(`Internal server error, ${err.message}`);
@@ -57,5 +57,17 @@ export const updateFinance = async (req: Request, res: Response) => {
     return res
       .status(500)
       .send('Internal server error, please contact support at');
+  }
+};
+
+export const filterExpense = async (req: Request, res: Response) => {
+  try {
+    const finance = await financeService.filterExpense(req);
+
+    return res.status(200).send(finance);
+  } catch (err: any) {
+    return res
+      .status(500)
+      .send('Internal server error, please contact support');
   }
 };
