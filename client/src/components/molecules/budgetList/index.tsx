@@ -62,7 +62,7 @@ const BudgetList = () => {
         <span>{page}</span>
         <Button
           onClick={() => setPage(page + 1)}
-          disabled={page === numberOfPages - 1}
+          disabled={page === numberOfPages}
           className="pageDiv__btn--arrow">
           {'>'}
         </Button>
