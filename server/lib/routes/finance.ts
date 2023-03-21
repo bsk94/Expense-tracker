@@ -2,11 +2,10 @@ import createRouter from 'express-promise-router';
 import { financeController } from '../controllers';
 const router = createRouter();
 
-router.post('/finance', financeController.addFinance);
-router.get('/finance', financeController.getFinance);
-router.get('/finance/:financeType/:dates?', financeController.filterExpense);
-router.get('/finance/:id', financeController.getSingleFinance);
-router.delete('/finance/:id', financeController.deleteFinance);
-router.patch('/finance/:id', financeController.updateFinance);
+router.post('/', financeController.addFinance);
+router.get('/', financeController.getFinance);
+router.get('/:id', financeController.getSingleFinance);
+router.delete('/:id', financeController.deleteFinance);
+router.patch('/:id', financeController.updateFinance);
 
 export default router;

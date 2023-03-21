@@ -18,7 +18,6 @@ const EditExpenseRevenue = () => {
   const { id } = useParams();
   const { data } = useSingleFinance(id as string);
   const { mutateAsync } = useUpdateFinance();
-  console.log('aaa', data);
 
   const [chosen, setChosen] = useState<any>('');
 

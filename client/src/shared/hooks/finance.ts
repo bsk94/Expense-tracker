@@ -50,7 +50,7 @@ const fetchFinanceItem = async (id: string) =>
   await axios.get(`http://localhost:4000/finance/${id}`).then((resp) => resp.data);
 
 export const useSingleFinance = (id: string) => {
-  const { data, isError } = useQuery(['finance', id], () => fetchFinanceItem(id));
+  const { data, isError } = useQuery(['financeSingle', id], () => fetchFinanceItem(id));
 
   return { data, isError };
 };
@@ -62,13 +62,4 @@ export const useUpdateFinance = () => {
   const { mutateAsync } = useMutation(['finance'], updateItem);
 
   return { mutateAsync };
-};
-
-const fetchFinanceStatistics = async (dates: string) =>
-  await axios.get(`http://localhost:4000/finance/expense/${dates}`).then((resp) => resp.data);
-
-export const useFinanceStatistics = (dates: string) => {
-  const { data } = useQuery(['finance', dates], () => fetchFinanceStatistics(dates));
-
-  return { data };
 };

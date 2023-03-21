@@ -1,10 +1,14 @@
 import { StyledTotalBalance, StyledTotalBalanceAmount } from './totalBalance-styles';
 
-const TotalBalance = () => {
+interface TotalBalaceProps {
+  balance: number;
+}
+
+const TotalBalance = ({ balance }: TotalBalaceProps) => {
   return (
     <StyledTotalBalance>
       <span>Total Balance</span>
-      <StyledTotalBalanceAmount>$ 12,548,00</StyledTotalBalanceAmount>
+      <StyledTotalBalanceAmount>$ {balance}</StyledTotalBalanceAmount>
     </StyledTotalBalance>
   );
 };

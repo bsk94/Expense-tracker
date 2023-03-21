@@ -38,7 +38,8 @@ export const deleteFinance = async (req: Request, res: Response) => {
 
 export const getSingleFinance = async (req: Request, res: Response) => {
   try {
-    const finance = await financeService.getSingleFinance(req);
+    const { id } = req.params;
+    const finance = await financeService.getSingleFinance(id);
 
     return res.status(200).send(finance);
   } catch (err: any) {
@@ -57,17 +58,5 @@ export const updateFinance = async (req: Request, res: Response) => {
     return res
       .status(500)
       .send('Internal server error, please contact support at');
-  }
-};
-
-export const filterExpense = async (req: Request, res: Response) => {
-  try {
-    const finance = await financeService.filterExpense(req);
-
-    return res.status(200).send(finance);
-  } catch (err: any) {
-    return res
-      .status(500)
-      .send('Internal server error, please contact support');
   }
 };

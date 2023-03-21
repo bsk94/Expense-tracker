@@ -15,8 +15,6 @@ const financeSchema = new mongoose_1.default.Schema({
     date: {
         type: String,
         required: [true, 'Please provide a date'],
-        // min: '01/01/2022',
-        // max: new Date(),
     },
     amount: {
         type: Number,

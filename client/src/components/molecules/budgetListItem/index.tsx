@@ -13,8 +13,9 @@ import editIcon from '../../../assets/icons/edit icon.svg';
 import { BudgetItemList } from '../../../shared/types';
 import { useState } from 'react';
 import { useDeleteFinance, useFinance } from '../../../shared/hooks/finance';
+import { useBalance } from '../../../shared/hooks/balance';
 
-type OverviewProps = {
+type BudgetListItemProps = {
   item: BudgetItemList;
   isDesktop: boolean;
   page: number;
@@ -24,15 +25,17 @@ const BudgetListItem = ({
   item: { name, amount, date, _id: id, icon, financeType },
   isDesktop,
   page
-}: OverviewProps) => {
+}: BudgetListItemProps) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
 
   const { mutateAsync } = useDeleteFinance();
   const { refetch } = useFinance(page);
+  const { refetch: refetchBalance } = useBalance();
 
   const handleDelete = async (id: string) => {
     await mutateAsync(id);
     refetch();
+    refetchBalance();
   };
 
   return (

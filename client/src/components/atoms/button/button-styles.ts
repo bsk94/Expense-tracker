@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import arrowLeft from '../../../assets/icons/arrow-left.svg';
-import arrowRight from '../../../assets/icons/arrow-right.svg';
 
 export const StyledButton = styled.button`
   height: 3.8rem;

@@ -7,7 +7,7 @@ import { ReactComponent as Transport } from '../../../assets/icons/bus.svg';
 import { ReactComponent as Food } from '../../../assets/icons/silverware.svg';
 import { ReactComponent as Entertainment } from '../../../assets/icons/smily.svg';
 import { ReactComponent as Other } from '../../../assets/icons/pen.svg';
-import { useFinanceStatistics } from '../../../shared/hooks/finance';
+import { useFinanceStatistics } from '../../../shared/hooks/statistics';
 import { BudgetItem } from '../../../shared/types';
 
 import {

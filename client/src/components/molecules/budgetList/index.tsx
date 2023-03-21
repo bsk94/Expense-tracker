@@ -1,4 +1,4 @@
-import { StyledList, StyledParagraf, StyledPaginationWrapper } from './budgetList-styles';
+import { StyledList, StyledParagraf } from './budgetList-styles';
 import BudgetListItem from '../budgetListItem';
 import payday from '../../../assets/icons/payday-icon.svg';
 import food from '../../../assets/icons/silverware.svg';
@@ -8,19 +8,27 @@ import transport from '../../../assets/icons/bus.svg';
 import other from '../../../assets/icons/pen.svg';
 import { BudgetItemList, BudgetItem } from '../../../shared/types';
 import { useIsDesktop } from '../../../shared/hooks/isDesktop';
-import { useFinance } from '../.././../shared/hooks/finance';
 import Skeleton from '../skeletonLoading';
 import { StyledError } from '../../../shared/styles';
-import { useState } from 'react';
-import Button from '../../atoms/button';
 
 const categoryIcons: any = { food, home, entertainment, transport, other };
 
-const BudgetList = () => {
-  const { isDesktop } = useIsDesktop();
-  const [page, setPage] = useState(1);
+interface BudgetListProps {
+  financeData: BudgetItem[];
+  isLoading: boolean;
+  isError: boolean;
+  totalFinanceNumber: number;
+  page: number;
+}
 
-  const { financeData, totalFinanceNumber, numberOfPages, isLoading, isError } = useFinance(page);
+const BudgetList = ({
+  financeData,
+  isLoading,
+  isError,
+  totalFinanceNumber,
+  page
+}: BudgetListProps) => {
+  const { isDesktop } = useIsDesktop();
 
   const addVisibilityAndIconToData = (financeData: BudgetItem[]): BudgetItemList[] => {
     return financeData?.map((element: any) => {
@@ -45,29 +53,12 @@ const BudgetList = () => {
   }
 
   return (
-    <>
-      <StyledList>
-        <StyledParagraf>Found {totalFinanceNumber} records</StyledParagraf>
-        {addVisibilityAndIconToData(financeData)?.map((item) => (
-          <BudgetListItem key={item._id} isDesktop={isDesktop} page={page} item={item} />
-        ))}
-      </StyledList>
-      <StyledPaginationWrapper>
-        <Button
-          onClick={() => setPage(page - 1)}
-          disabled={page === 1}
-          className="pageDiv__btn--arrow">
-          {'<'}
-        </Button>
-        <span>{page}</span>
-        <Button
-          onClick={() => setPage(page + 1)}
-          disabled={page === numberOfPages}
-          className="pageDiv__btn--arrow">
-          {'>'}
-        </Button>
-      </StyledPaginationWrapper>
-    </>
+    <StyledList>
+      <StyledParagraf>Found {totalFinanceNumber} records</StyledParagraf>
+      {addVisibilityAndIconToData(financeData)?.map((item) => (
+        <BudgetListItem key={item._id} isDesktop={isDesktop} page={page} item={item} />
+      ))}
+    </StyledList>
   );
 };
 

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.filterExpense = exports.updateFinance = exports.getSingleFinance = exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
+exports.updateFinance = exports.getSingleFinance = exports.deleteFinance = exports.getFinance = exports.addFinance = void 0;
 const Finance_1 = require("../models/Finance");
 const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const newFinance = new Finance_1.FinanceModel({
@@ -41,7 +41,6 @@ const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getFinance = getFinance;
 const deleteFinance = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield Finance_1.FinanceModel.findByIdAndDelete(id);
-    console.log(result);
     if (!result) {
         throw new Error('Error while removing expenses from database');
     }
@@ -50,8 +49,7 @@ const deleteFinance = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.deleteFinance = deleteFinance;
-const getSingleFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.query;
+const getSingleFinance = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const finance = yield Finance_1.FinanceModel.findById(id);
     if (!finance) {
         throw Error('Error while fetching expenses from database');
@@ -77,31 +75,3 @@ const updateFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.updateFinance = updateFinance;
-const filterExpense = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    let query;
-    const typeOfFinance = req.params.financeType;
-    const dates = req.params.dates;
-    if (dates) {
-        const datesFormatted = dates.split(',');
-        const startDate = new Date(datesFormatted[0]).toISOString().slice(0, 10);
-        const endDate = new Date(datesFormatted[1]).toISOString().slice(0, 10);
-        query = {
-            financeType: typeOfFinance,
-            date: {
-                $gte: startDate,
-                $lte: endDate,
-            },
-        };
-    }
-    else {
-        query = { financeType: typeOfFinance };
-    }
-    const result = yield Finance_1.FinanceModel.find(query);
-    if (!result) {
-        throw new Error('Error while removing expenses from database');
-    }
-    else {
-        return result;
-    }
-});
-exports.filterExpense = filterExpense;
