@@ -18,7 +18,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ul {
-         list-style: none
+         list-style: none;
+      
     }
     
     html { 

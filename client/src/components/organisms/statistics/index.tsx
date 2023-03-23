@@ -102,7 +102,7 @@ const Statistics = () => {
                 <SvgIcon Icon={icon} width={isDesktop ? 55 : 42} />
                 <StyledTextContainer>
                   <span>{name}</span>
-                  <span>{value} $</span>
+                  <span>$ {value}</span>
                 </StyledTextContainer>
               </StyledIconListItem>
             );
