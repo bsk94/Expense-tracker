@@ -5,7 +5,7 @@ export const useClickOutside = (handler: () => void) => {
 
   useEffect(() => {
     const maybeHandler = (e: MouseEvent) => {
-      if (selectRef.current != null && selectRef.current.contains(e.target as HTMLElement)) {
+      if (!selectRef.current?.contains(e.target as HTMLElement)) {
         handler();
       }
     };
