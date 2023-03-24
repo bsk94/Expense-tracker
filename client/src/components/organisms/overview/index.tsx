@@ -38,7 +38,6 @@ const Overview = () => {
 
           <CategoryFilter useCategoryPick={useCategoryPick} />
         </StyledCategoryAndCalendarContainer>
-
         <BudgetList
           financeData={financeData}
           isLoading={isLoading}

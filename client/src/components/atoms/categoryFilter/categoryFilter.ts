@@ -37,7 +37,12 @@ export const StyledItemList = styled.li`
 
 export const StyledSelectIcon = styled.img.attrs({
   src: `${SelectIcon}`
-})``;
+})`
+  &.disable {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+`;
 
 export const StyledContainer = styled.div`
   position: relative;
