@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { FinanceModel } from '../models/Finance';
 
 export const filterExpense = async (req: Request) => {
-  let query;
+  let query = {};
 
   const typeOfFinance = req.params.financeType;
   const dates = req.params.dates;

@@ -19,17 +19,23 @@ type BudgetListItemProps = {
   item: BudgetItemList;
   isDesktop: boolean;
   page: number;
+  categoryPick: string;
+  dateRange: string;
+  currentFinType: any;
 };
 
 const BudgetListItem = ({
   item: { name, amount, date, _id: id, icon, financeType },
   isDesktop,
-  page
+  page,
+  categoryPick,
+  dateRange,
+  currentFinType
 }: BudgetListItemProps) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
 
   const { mutateAsync } = useDeleteFinance();
-  const { refetch } = useFinance(page);
+  const { refetch } = useFinance({ page, categoryPick, dateRange, currentFinType });
   const { refetch: refetchBalance } = useBalance();
 
   const handleDelete = async (id: string) => {

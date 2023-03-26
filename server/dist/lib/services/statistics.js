@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.filterExpense = void 0;
 const Finance_1 = require("../models/Finance");
 const filterExpense = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    let query;
+    let query = {};
     const typeOfFinance = req.params.financeType;
     const dates = req.params.dates;
     if (dates) {

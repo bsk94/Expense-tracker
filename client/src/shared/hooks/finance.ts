@@ -21,13 +21,29 @@ export const usePostRevenue = () => {
   return { data, mutateAsync };
 };
 
-const fetchFinance = async (page: number) =>
-  await axios.get(`http://localhost:4000/finance?p=${page}`).then((resp) => resp.data);
+interface FetchFinanceProps {
+  page: number;
+  categoryPick: string;
+  dateRange: string;
+  currentFinType: 'all' | 'expense' | 'revenue';
+}
 
-export const useFinance = (page: number) => {
+const fetchFinance = async ({ page, categoryPick, dateRange, currentFinType }: FetchFinanceProps) =>
+  await axios
+    .get(
+      `http://localhost:4000/finance?p=${page}&category=${categoryPick}&dates=${dateRange}&financeType=${currentFinType}`
+    )
+    .then((resp) => resp.data);
+
+export const useFinance = ({
+  page,
+  categoryPick,
+  dateRange,
+  currentFinType
+}: FetchFinanceProps) => {
   const { data, isLoading, isError, refetch } = useQuery(
-    ['finance', page],
-    () => fetchFinance(page),
+    ['finance', { page, categoryPick, dateRange, currentFinType }],
+    () => fetchFinance({ page, categoryPick, dateRange, currentFinType }),
     { keepPreviousData: true }
   );
 

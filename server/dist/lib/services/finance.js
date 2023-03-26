@@ -24,12 +24,37 @@ const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.addFinance = addFinance;
 const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    let query = {};
+    const financeType = req.query.financeType;
+    const dates = req.query.dates;
+    const category = req.query.category;
     const page = Number(req.query.p) || 1;
     const itemsPerPage = 4;
-    const finance = yield Finance_1.FinanceModel.find()
+    if (financeType) {
+        if (financeType === 'all') {
+            query = {};
+        }
+        else {
+            query = { financeType: financeType };
+        }
+    }
+    if (dates) {
+        const datesFormatted = dates.split(',');
+        const startDate = new Date(datesFormatted[0]).toISOString().slice(0, 10);
+        const endDate = new Date(datesFormatted[1]).toISOString().slice(0, 10);
+        query = Object.assign(Object.assign({}, query), { date: {
+                $gte: startDate,
+                $lte: endDate,
+            } });
+    }
+    if (category) {
+        query = Object.assign(Object.assign({}, query), { expenseCategory: category });
+    }
+    const finance = yield Finance_1.FinanceModel.find(query)
         .skip((page - 1) * itemsPerPage)
-        .limit(itemsPerPage);
-    const total = yield Finance_1.FinanceModel.countDocuments();
+        .limit(itemsPerPage)
+        .sort({ date: -1 });
+    const total = yield Finance_1.FinanceModel.countDocuments(query);
     const pages = Math.ceil(total / itemsPerPage);
     if (!finance) {
         throw Error('Error while fetching expenses from database');

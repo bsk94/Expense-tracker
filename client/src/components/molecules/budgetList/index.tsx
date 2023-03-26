@@ -19,6 +19,9 @@ interface BudgetListProps {
   isError: boolean;
   totalFinanceNumber: number;
   page: number;
+  categoryPick: string;
+  dateRange: string;
+  currentFinType: string;
 }
 
 const BudgetList = ({
@@ -26,7 +29,10 @@ const BudgetList = ({
   isLoading,
   isError,
   totalFinanceNumber,
-  page
+  page,
+  categoryPick,
+  dateRange,
+  currentFinType
 }: BudgetListProps) => {
   const { isDesktop } = useIsDesktop();
 
@@ -56,7 +62,15 @@ const BudgetList = ({
     <StyledList>
       <StyledParagraf>Found {totalFinanceNumber} records</StyledParagraf>
       {addVisibilityAndIconToData(financeData)?.map((item) => (
-        <BudgetListItem key={item._id} isDesktop={isDesktop} page={page} item={item} />
+        <BudgetListItem
+          key={item._id}
+          isDesktop={isDesktop}
+          page={page}
+          item={item}
+          currentFinType={currentFinType}
+          categoryPick={categoryPick}
+          dateRange={dateRange}
+        />
       ))}
     </StyledList>
   );

@@ -26,14 +26,47 @@ export const addFinance = async (req: Request) => {
 };
 
 export const getFinance = async (req: Request) => {
-  const page: number = Number(req.query.p) || 1;
-  const itemsPerPage: number = 4;
+  let query = {};
 
-  const finance = await FinanceModel.find()
+  const financeType = req.query.financeType;
+  const dates = req.query.dates as string;
+  const category = req.query.category;
+  const page = Number(req.query.p) || 1;
+
+  const itemsPerPage = 4;
+
+  if (financeType) {
+    if (financeType === 'all') {
+      query = {};
+    } else {
+      query = { financeType: financeType };
+    }
+  }
+
+  if (dates) {
+    const datesFormatted = dates.split(',');
+    const startDate = new Date(datesFormatted[0]).toISOString().slice(0, 10);
+    const endDate = new Date(datesFormatted[1]).toISOString().slice(0, 10);
+
+    query = {
+      ...query,
+      date: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    };
+  }
+
+  if (category) {
+    query = { ...query, expenseCategory: category };
+  }
+
+  const finance = await FinanceModel.find(query)
     .skip((page - 1) * itemsPerPage)
-    .limit(itemsPerPage);
+    .limit(itemsPerPage)
+    .sort({ date: -1 });
 
-  const total = await FinanceModel.countDocuments();
+  const total = await FinanceModel.countDocuments(query);
 
   const pages = Math.ceil(total / itemsPerPage);
 
