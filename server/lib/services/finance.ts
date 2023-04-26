@@ -33,7 +33,7 @@ export const getFinance = async (req: Request) => {
   const category = req.query.category;
   const page = Number(req.query.p) || 1;
 
-  const itemsPerPage = 4;
+  const itemsPerPage = 10;
 
   if (financeType) {
     if (financeType === 'all') {
@@ -61,19 +61,19 @@ export const getFinance = async (req: Request) => {
     query = { ...query, expenseCategory: category };
   }
 
+  const skip = (page - 1) * itemsPerPage;
+
   const finance = await FinanceModel.find(query)
-    .skip((page - 1) * itemsPerPage)
+    .skip(skip)
     .limit(itemsPerPage)
     .sort({ date: -1 });
 
-  const total = await FinanceModel.countDocuments(query);
-
-  const pages = Math.ceil(total / itemsPerPage);
+  const count = await FinanceModel.countDocuments(query);
 
   if (!finance) {
     throw Error('Error while fetching expenses from database');
   } else {
-    return { finance, total, pages };
+    return { finance, count };
   }
 };
 

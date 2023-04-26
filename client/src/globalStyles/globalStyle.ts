@@ -57,6 +57,25 @@ const GlobalStyle = createGlobalStyle`
         transition: background-color 5000s ease-in-out 0s;
     }
 
+
+      /* Works on Firefox */
+      * {
+      scrollbar-width: thin;
+      scrollbar-color:  rgb(206, 212, 205)
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 2rem;
+    }
+
+
+    *::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 10px 10px rgb(206, 212, 205);
+      border-radius: 20px;
+      border: 0.6rem solid transparent;
+    }
+
     @font-face {
     font-family: 'Electrolize-Regular';
     src: url(${Electrolize}) format('truetype');

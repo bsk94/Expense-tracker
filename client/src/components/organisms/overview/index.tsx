@@ -8,32 +8,20 @@ import {
   StyledCalendarIcon,
   StyledCategoryAndCalendarContainer
 } from './overview-styled';
-import { useFinance } from '../.././../shared/hooks/finance';
+
 import { useBalance } from '../.././../shared/hooks/balance';
-import Pagination from '../../molecules/pagination/index';
 import CategoryFilter from '../../atoms/categoryFilter/index';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../app/store';
 
 const Overview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [page, setPage] = useState<number>(1);
-  const [categoryPick, useCategoryPick] = useState<string>('');
+  const [categoryPick, useCategoryPick] = useState('');
   const [dateRange, useDateRange] = useState('');
 
   const currentFinType = useSelector((state: RootState) => state.finance.financeTypes);
 
-  const { financeData, totalFinanceNumber, numberOfPages, isLoading, isError } = useFinance({
-    page,
-    categoryPick,
-    dateRange,
-    currentFinType
-  });
   const { balance } = useBalance();
-
-  useEffect(() => {
-    setPage(1);
-  }, [currentFinType, dateRange, categoryPick]);
 
   return (
     <>
@@ -52,16 +40,10 @@ const Overview = () => {
           <CategoryFilter useCategoryPick={useCategoryPick} />
         </StyledCategoryAndCalendarContainer>
         <BudgetList
-          financeData={financeData}
-          isLoading={isLoading}
-          isError={isError}
-          totalFinanceNumber={totalFinanceNumber}
-          page={page}
           categoryPick={categoryPick}
           dateRange={dateRange}
           currentFinType={currentFinType}
         />
-        <Pagination numberOfPages={numberOfPages} setPage={setPage} page={page} />
       </StyledOverviewContainer>
     </>
   );

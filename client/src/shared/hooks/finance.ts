@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { ExpenseItem } from '../types';
 import { RevenueItem } from '../../shared/types';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 const addExpense = async (payload: ExpenseItem) =>
   await axios.post('http://localhost:4000/finance', payload);
@@ -21,37 +22,36 @@ export const usePostRevenue = () => {
   return { data, mutateAsync };
 };
 
-interface FetchFinanceProps {
-  page: number;
+export interface FetchFinanceProps {
   categoryPick: string;
   dateRange: string;
   currentFinType: 'all' | 'expense' | 'revenue';
 }
 
-const fetchFinance = async ({ page, categoryPick, dateRange, currentFinType }: FetchFinanceProps) =>
-  await axios
-    .get(
-      `http://localhost:4000/finance?p=${page}&category=${categoryPick}&dates=${dateRange}&financeType=${currentFinType}`
-    )
-    .then((resp) => resp.data);
+export const useFinancePosts = ({ categoryPick, dateRange, currentFinType }: FetchFinanceProps) => {
+  const fetchPosts = async ({ pageParam = 1 }) => {
+    const response = await axios.get(
+      `http://localhost:4000/finance?p=${pageParam}&category=${categoryPick}&dates=${dateRange}&financeType=${currentFinType}`
+    );
+    return response.data;
+  };
 
-export const useFinance = ({
-  page,
-  categoryPick,
-  dateRange,
-  currentFinType
-}: FetchFinanceProps) => {
-  const { data, isLoading, isError, refetch } = useQuery(
-    ['finance', { page, categoryPick, dateRange, currentFinType }],
-    () => fetchFinance({ page, categoryPick, dateRange, currentFinType }),
-    { keepPreviousData: true }
-  );
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError, refetch } =
+    useInfiniteQuery(['finance', { categoryPick, dateRange, currentFinType }], fetchPosts, {
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.finance.length ? allPages.length : undefined;
+      }
+    });
 
-  const financeData = data?.finance;
-  const totalFinanceNumber = data?.total;
-  const numberOfPages = data?.pages;
-
-  return { financeData, totalFinanceNumber, numberOfPages, isLoading, isError, refetch };
+  return {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    refetch
+  };
 };
 
 const deleteItem = async (id: string) => await axios.delete(`http://localhost:4000/finance/${id}`);

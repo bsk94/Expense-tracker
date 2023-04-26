@@ -29,7 +29,7 @@ const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const dates = req.query.dates;
     const category = req.query.category;
     const page = Number(req.query.p) || 1;
-    const itemsPerPage = 4;
+    const itemsPerPage = 10;
     if (financeType) {
         if (financeType === 'all') {
             query = {};
@@ -50,17 +50,17 @@ const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     if (category) {
         query = Object.assign(Object.assign({}, query), { expenseCategory: category });
     }
+    const skip = (page - 1) * itemsPerPage;
     const finance = yield Finance_1.FinanceModel.find(query)
-        .skip((page - 1) * itemsPerPage)
+        .skip(skip)
         .limit(itemsPerPage)
         .sort({ date: -1 });
-    const total = yield Finance_1.FinanceModel.countDocuments(query);
-    const pages = Math.ceil(total / itemsPerPage);
+    const count = yield Finance_1.FinanceModel.countDocuments(query);
     if (!finance) {
         throw Error('Error while fetching expenses from database');
     }
     else {
-        return { finance, total, pages };
+        return { finance, count };
     }
 });
 exports.getFinance = getFinance;
