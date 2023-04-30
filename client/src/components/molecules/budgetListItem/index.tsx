@@ -29,7 +29,7 @@ type Props = {
   isDesktop: boolean;
   categoryPick: string;
   dateRange: string;
-  currentFinType: 'all' | 'expense' | 'revenue';
+  currentFinType: any;
 };
 
 const BudgetListItem = forwardRef<HTMLLIElement, Props>(

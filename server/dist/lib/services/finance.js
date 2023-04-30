@@ -35,7 +35,7 @@ const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
             query = {};
         }
         else {
-            query = { financeType: financeType };
+            query = Object.assign(Object.assign({}, query), { financeType: financeType });
         }
     }
     if (dates) {

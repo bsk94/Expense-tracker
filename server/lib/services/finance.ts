@@ -39,7 +39,7 @@ export const getFinance = async (req: Request) => {
     if (financeType === 'all') {
       query = {};
     } else {
-      query = { financeType: financeType };
+      query = { ...query, financeType: financeType };
     }
   }
 

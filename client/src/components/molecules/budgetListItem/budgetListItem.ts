@@ -9,11 +9,7 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const StyledList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+export const StyledList = styled.ul``;
 
 export const StyledFinanceListItem = styled.li<{ showEditDelete?: boolean }>`
   background-color: ${({ theme }) => theme.colors.lightest};

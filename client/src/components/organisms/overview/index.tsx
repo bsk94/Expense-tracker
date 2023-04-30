@@ -23,6 +23,13 @@ const Overview = () => {
 
   const { balance } = useBalance();
 
+  useEffect(() => {
+    if (currentFinType !== 'expense') {
+      useCategoryPick('');
+      useDateRange('');
+    }
+  }, [currentFinType]);
+
   return (
     <>
       <DatePickerModal

@@ -13,7 +13,6 @@ export const StyledList = styled.ul`
     background-color: ${({ theme }) => theme.colors.lightest};
     display: flex;
     justify-content: space-between;
-    height: 20.5rem;
     margin: 1rem 0rem;
     width: 100%;
     transition: transform 0.15s ease;

@@ -39,7 +39,7 @@ export const useFinancePosts = ({ categoryPick, dateRange, currentFinType }: Fet
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError, refetch } =
     useInfiniteQuery(['finance', { categoryPick, dateRange, currentFinType }], fetchPosts, {
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.finance.length ? allPages.length : undefined;
+        return lastPage.finance.length ? allPages.length + 1 : undefined;
       }
     });
 
