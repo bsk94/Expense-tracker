@@ -23,10 +23,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.balanceService = exports.statisticsService = exports.financeService = void 0;
+exports.userService = exports.balanceService = exports.statisticsService = exports.financeService = void 0;
 const financeService = __importStar(require("./finance"));
 exports.financeService = financeService;
 const statisticsService = __importStar(require("./statistics"));
 exports.statisticsService = statisticsService;
 const balanceService = __importStar(require("./balance"));
 exports.balanceService = balanceService;
+const userService = __importStar(require("./user"));
+exports.userService = userService;

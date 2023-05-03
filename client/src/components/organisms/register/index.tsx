@@ -11,27 +11,40 @@ import {
 } from './register-styles';
 import { routes } from '../../../router/routes';
 import { registerValidationSchema } from '../../../validation/registerFormSchema';
+import { useNavigate } from 'react-router-dom';
+import { usePostUser } from '../../../shared/hooks/user';
+
+interface LoginInitialValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const Register = () => {
-  interface LoginInitialValues {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }
+  const navigate = useNavigate();
+
+  const { mutateAsync } = usePostUser();
+
   const initialValues: LoginInitialValues = {
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
   };
+
+  const handleOnSubmit = async (values: LoginInitialValues, { resetForm }: { resetForm: any }) => {
+    console.log(values);
+    await mutateAsync(values);
+    resetForm();
+    navigate('/login');
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={registerValidationSchema}
-      onSubmit={(values) => {
-        console.log(values);
-      }}>
+      onSubmit={handleOnSubmit}>
       {({ values, handleChange }) => (
         <StyledContainer>
           <StyledForm>

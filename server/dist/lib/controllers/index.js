@@ -23,10 +23,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.balanceController = exports.statisticsController = exports.financeController = void 0;
+exports.userController = exports.balanceController = exports.statisticsController = exports.financeController = void 0;
 const financeController = __importStar(require("./finance"));
 exports.financeController = financeController;
 const statisticsController = __importStar(require("./statistics"));
 exports.statisticsController = statisticsController;
 const balanceController = __importStar(require("./balance"));
 exports.balanceController = balanceController;
+const userController = __importStar(require("./user"));
+exports.userController = userController;
