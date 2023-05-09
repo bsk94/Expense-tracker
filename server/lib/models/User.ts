@@ -45,4 +45,14 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
+UserSchema.methods.comparePasswords = async function (password: string) {
+  return await bcrypt.compare(password, this.password);
+};
+
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+}
+
 export const UserModel = mongoose.model('User', UserSchema);

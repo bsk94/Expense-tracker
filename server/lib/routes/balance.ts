@@ -1,7 +1,8 @@
 import createRouter from 'express-promise-router';
 import { balanceController } from '../controllers';
+import { secureRoute } from '../services/auth';
 const router = createRouter();
 
-router.get('/', balanceController.getBalance);
+router.get('/', secureRoute, balanceController.getBalance);
 
 export default router;

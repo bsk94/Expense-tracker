@@ -18,7 +18,9 @@ const addFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
         amount: req.body.amount,
         financeType: req.body.financeType,
         expenseCategory: req.body.expenseCategory,
+        userId: req.user._id,
     });
+    console.log('aaaa', req.user._id);
     yield newFinance.save();
     return {};
 });

@@ -11,14 +11,16 @@ interface Finance {
   id: string;
 }
 
-export const addFinance = async (req: Request) => {
+export const addFinance = async (req: any) => {
   const newFinance = new FinanceModel({
     name: req.body.name,
     date: req.body.date,
     amount: req.body.amount,
     financeType: req.body.financeType,
     expenseCategory: req.body.expenseCategory,
+    userId: req.user._id,
   });
+  console.log('aaaa', req.user._id);
 
   await newFinance.save();
 

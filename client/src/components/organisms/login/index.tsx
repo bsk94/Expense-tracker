@@ -11,23 +11,29 @@ import {
   StyledLink
 } from './login-styles';
 import { routes } from '../../../router/routes';
+import { useAuth } from '../../../shared/hooks/user';
+
+interface LoginInitialValues {
+  email: string;
+  password: string;
+}
+
+const initialValues: LoginInitialValues = { email: '', password: '' };
 
 const Login = () => {
-  interface LoginInitialValues {
-    email: string;
-    password: string;
-  }
-  const initialValues: LoginInitialValues = {
-    email: '',
-    password: ''
+  const { mutateAsync } = useAuth();
+
+  const handleOnSubmit = async (values: LoginInitialValues, { resetForm }: { resetForm: any }) => {
+    console.log(values);
+    await mutateAsync(values);
+    resetForm();
   };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={loginValidationSchema}
-      onSubmit={(values) => {
-        console.log(values);
-      }}>
+      onSubmit={handleOnSubmit}>
       {({ values, handleChange }) => (
         <StyledContainer>
           <StyledForm>

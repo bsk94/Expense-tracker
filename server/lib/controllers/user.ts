@@ -12,6 +12,14 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {};
+export const login = async (req: Request, res: Response) => {
+  try {
+    const { token } = await userService.login(req);
+
+    return res.status(200).json({ success: true, body: { token } });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
 
 export const refreshToken = async (req: Request, res: Response) => {};

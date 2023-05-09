@@ -25,6 +25,10 @@ const financeSchema = new mongoose.Schema({
     type: String,
     enum: ['Home', 'Entertainment', 'Other', 'Food', 'Transport'],
   },
+  userId: {
+    type: Types.ObjectId,
+    required: [true],
+  },
 });
 
 export const FinanceModel = mongoose.model('Finance', financeSchema);
