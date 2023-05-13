@@ -15,10 +15,19 @@ import { sidebarData } from '../../../helpers/sidebar';
 import Button from '../../atoms/button';
 import { useIsDesktop } from '../../../shared/hooks/isDesktop';
 import { useLocation } from 'react-router-dom';
+import { removeTokens } from '../../../utils/auth';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../../../features/authSlice';
 
 const Navbar = () => {
   const { isDesktop } = useIsDesktop();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    removeTokens();
+    dispatch(setAuth(false));
+  };
 
   return (
     <>
@@ -43,7 +52,7 @@ const Navbar = () => {
             </StyledList>
             <StyledLogoutLink to={routes.login}>
               <StyledLogoutIcon alt="log out icon" />
-              <Button>Log out</Button>
+              <Button onClick={logout}>Log out</Button>
             </StyledLogoutLink>
           </StyledNav>
         </>
@@ -51,7 +60,7 @@ const Navbar = () => {
         <>
           <StyledLogoutLinkMobile to={routes.login}>
             <StyledLogoutIcon alt="log out icon" />
-            <Button>Log out</Button>
+            <Button onClick={logout}>Log out</Button>
           </StyledLogoutLinkMobile>
           <StyledNav>
             <StyledList>

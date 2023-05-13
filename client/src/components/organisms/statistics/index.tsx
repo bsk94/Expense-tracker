@@ -19,8 +19,13 @@ import {
 import { useState } from 'react';
 import SvgIcon from '../../atoms/svg';
 import DatePickerModal from '../../atoms/datePicker';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
 
 const Statistics = () => {
+  const isUser = useSelector((state: RootState) => state.auth.isUser);
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { isDesktop } = useIsDesktop();
 
@@ -61,6 +66,9 @@ const Statistics = () => {
     },
     { name: 'Other', value: valuesMap.get('Other'), color: theme.colors.green, icon: Other }
   ];
+  if (!isUser) {
+    return <Navigate to={'/login'} />;
+  }
 
   return (
     <>

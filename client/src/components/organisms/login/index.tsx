@@ -12,6 +12,10 @@ import {
 } from './login-styles';
 import { routes } from '../../../router/routes';
 import { useAuth } from '../../../shared/hooks/user';
+import { RootState } from '../../../app/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { setAuth } from '../../../features/authSlice';
 
 interface LoginInitialValues {
   email: string;
@@ -21,13 +25,21 @@ interface LoginInitialValues {
 const initialValues: LoginInitialValues = { email: '', password: '' };
 
 const Login = () => {
+  const isUser = useSelector((state: RootState) => state.auth.isUser);
+  const dispatch = useDispatch();
+
   const { mutateAsync } = useAuth();
 
   const handleOnSubmit = async (values: LoginInitialValues, { resetForm }: { resetForm: any }) => {
     console.log(values);
     await mutateAsync(values);
     resetForm();
+    dispatch(setAuth(true));
   };
+
+  if (isUser) {
+    return <Navigate to={'/'} />;
+  }
 
   return (
     <Formik
@@ -59,7 +71,7 @@ const Login = () => {
               <FormError name="password" />
             </StyledInputs>
             <Button type="submit" className="formLogin__btn--login">
-              Login
+              Log in
             </Button>
             <StyledRegisterWrapper>
               <p>No account?</p>
@@ -73,3 +85,6 @@ const Login = () => {
 };
 
 export default Login;
+function dispatch(arg0: any) {
+  throw new Error('Function not implemented.');
+}

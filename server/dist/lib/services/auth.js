@@ -15,7 +15,6 @@ const secureRoute = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     const user = yield (0, user_1.auth)(req.headers['authorization']);
     if (user) {
         req.user = user;
-        console.log('gggg', user);
         next();
     }
     else {

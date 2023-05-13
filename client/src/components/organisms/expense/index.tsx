@@ -10,14 +10,22 @@ import { ExpenseItem, InitialExpense } from '../../../shared/types';
 import { usePostExpense } from '../../../shared/hooks/finance';
 import { StyledInputs, StyleCategory } from './expense-styles';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
+import { Navigate } from 'react-router-dom';
 
 const AddExpense = () => {
+  const isUser = useSelector((state: RootState) => state.auth.isUser);
+
   const [chosen, setChosen] = useState('');
 
   const navigate = useNavigate();
 
   const { mutateAsync } = usePostExpense();
 
+  if (!isUser) {
+    return <Navigate to={'/login'} />;
+  }
   const initialValues: InitialExpense = {
     name: '',
     date: '',

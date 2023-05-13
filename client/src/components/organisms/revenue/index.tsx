@@ -8,11 +8,18 @@ import FormError from '../../atoms/formError';
 import { usePostRevenue } from '../../../shared/hooks/finance';
 import { StyledInputs } from './revenue-styles';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
+import { Navigate } from 'react-router-dom';
 
 const AddRevenue = () => {
   const { mutateAsync } = usePostRevenue();
 
   const navigate = useNavigate();
+  const isUser = useSelector((state: RootState) => state.auth.isUser);
+  if (!isUser) {
+    return <Navigate to={'/login'} />;
+  }
 
   const initialValues: InitialRevenue = {
     name: '',

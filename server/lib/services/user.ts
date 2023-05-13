@@ -3,8 +3,6 @@ import { Request, Response } from 'express';
 import { User, UserModel } from '../models/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
-dotenv.config();
 
 interface Tokens {
   token?: string;
@@ -54,7 +52,6 @@ interface Payload {
 }
 
 export const auth = async (token: string): Promise<User | null> => {
-  console.log('FFFFFF', token);
   const { id, exp } = (jwt.decode(token) as Payload) || {};
 
   if (id) {

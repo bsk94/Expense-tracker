@@ -19,6 +19,7 @@ const Input: React.FC<InputProps> = ({ type, name, value, onChange, placeholder,
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        id={name}
       />
       <StyledLabel htmlFor={name}>{children}</StyledLabel>
     </StyledContainer>

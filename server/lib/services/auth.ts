@@ -4,7 +4,6 @@ export const secureRoute = async (req: any, res: any, next: any) => {
   const user: any = await auth(req.headers['authorization']);
   if (user) {
     req.user = user;
-    console.log('gggg', user);
 
     next();
   } else {

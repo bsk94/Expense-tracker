@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import DatePickerModal from '../../atoms/datePicker';
 import BudgetList from '../../molecules/budgetList';
 import FilterByFinanceType from '../../molecules/filterByFinanceType';
@@ -13,6 +13,7 @@ import { useBalance } from '../.././../shared/hooks/balance';
 import CategoryFilter from '../../atoms/categoryFilter/index';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../app/store';
+import { Navigate } from 'react-router-dom';
 
 const Overview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,6 +30,11 @@ const Overview = () => {
       useDateRange('');
     }
   }, [currentFinType]);
+
+  const isUser = useSelector((state: RootState) => state.auth.isUser);
+  if (!isUser) {
+    return <Navigate to={'/login'} />;
+  }
 
   return (
     <>
