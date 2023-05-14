@@ -16,6 +16,7 @@ import { RootState } from '../../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { setAuth } from '../../../features/authSlice';
+import { useState } from 'react';
 
 interface LoginInitialValues {
   email: string;
@@ -27,6 +28,8 @@ const initialValues: LoginInitialValues = { email: '', password: '' };
 const Login = () => {
   const isUser = useSelector((state: RootState) => state.auth.isUser);
   const dispatch = useDispatch();
+
+  const [isShown, setIsShown] = useState(false);
 
   const { mutateAsync } = useAuth();
 
@@ -61,10 +64,13 @@ const Login = () => {
               </Input>
               <FormError name="email" />
               <Input
-                type="password"
+                type={isShown ? 'text' : 'password'}
+                className={isShown ? 'input__text' : 'input__password'}
                 name="password"
                 onChange={handleChange}
                 value={values.password}
+                isPassowrdIcon={true}
+                onToggle={() => setIsShown(!isShown)}
                 placeholder=" ">
                 password
               </Input>
@@ -85,6 +91,3 @@ const Login = () => {
 };
 
 export default Login;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}

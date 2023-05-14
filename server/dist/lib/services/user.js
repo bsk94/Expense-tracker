@@ -40,10 +40,30 @@ const login = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const token = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.SECRET, {
         expiresIn: '20min',
     });
-    return { token };
+    const refreshToken = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.REFRESH_SECRET, {
+        expiresIn: '180min',
+    });
+    console.log('hhh', refreshToken);
+    return { token, refreshToken };
 });
 exports.login = login;
-const refreshToken = (req) => __awaiter(void 0, void 0, void 0, function* () { });
+const refreshToken = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const refreshToken = req.body.refreshToken;
+    const { id, exp } = jsonwebtoken_1.default.decode(refreshToken) || {};
+    console.log(id);
+    console.log(exp);
+    const dateNow = new Date();
+    if (exp > dateNow.getTime() / 1000) {
+        const token = jsonwebtoken_1.default.sign({ id: id }, process.env.SECRET, {
+            expiresIn: '1min',
+        });
+        console.log('ccc', token);
+        return token;
+    }
+    else {
+        throw new Error('refresh Token is expired');
+    }
+});
 exports.refreshToken = refreshToken;
 const auth = (token) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, exp } = jsonwebtoken_1.default.decode(token) || {};

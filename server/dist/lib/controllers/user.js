@@ -22,15 +22,26 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.register = register;
-const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { token } = yield services_1.userService.login(req);
-        return res.status(200).json({ success: true, body: { token } });
+        const { token, refreshToken } = yield services_1.userService.login(req);
+        return res
+            .status(200)
+            .json({ success: true, body: { token, refreshToken } });
     }
     catch (err) {
         res.status(500).json({ err });
     }
 });
 exports.login = login;
-const refreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+const refreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const token = yield services_1.userService.refreshToken(req);
+        console.log('aaa', token);
+        return res.status(200).json({ success: true, token });
+    }
+    catch (err) {
+        res.status(500).json({ err });
+    }
+});
 exports.refreshToken = refreshToken;

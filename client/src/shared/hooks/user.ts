@@ -12,8 +12,9 @@ export const usePostUser = () => {
 
 const logIn = (payload: any) =>
   axios.post('http://localhost:4000/user/login', payload).then((resp) => {
-    const { token } = resp.data.body;
+    const { token, refreshToken } = resp.data.body;
     localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken);
   });
 
 export const useAuth = () => {

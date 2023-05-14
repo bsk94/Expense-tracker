@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import eyeIcon from '../../../assets/icons/eye.svg';
+import eyeCrossedIcon from '../../../assets/icons/eye-with-line.svg';
 
 export const StyledInput = styled.input`
   height: 5rem;
@@ -74,4 +76,21 @@ export const StyledLabel = styled.label`
       background: linear-gradient(0deg, rgba(255, 255, 255, 1) 50%, rgba(249, 255, 247, 1) 50%);
     }
   }
+`;
+
+export const StyledInputIcon = styled.i`
+  &.input__text {
+    background-image: url(${eyeCrossedIcon});
+  }
+  &.input__password {
+    background-image: url(${eyeIcon});
+  }
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 2rem;
+  width: 3rem;
+  position: absolute;
+  top: 62%;
+  right: 1.5rem;
 `;

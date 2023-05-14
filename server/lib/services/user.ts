@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { User, UserModel } from '../models/User';
 import bcrypt from 'bcryptjs';
@@ -41,10 +40,36 @@ export const login = async (req: Request) => {
     expiresIn: '20min',
   });
 
-  return { token } as Tokens;
+  const refreshToken = jwt.sign(
+    { id: user?._id },
+    process.env.REFRESH_SECRET as string,
+    {
+      expiresIn: '180min',
+    }
+  );
+  console.log('hhh', refreshToken);
+
+  return { token, refreshToken } as Tokens;
 };
 
-export const refreshToken = async (req: Request) => {};
+export const refreshToken = async (req: Request) => {
+  const refreshToken = req.body.refreshToken;
+
+  const { id, exp } = (jwt.decode(refreshToken) as Payload) || {};
+  console.log(id);
+  console.log(exp);
+
+  const dateNow = new Date();
+  if (exp > dateNow.getTime() / 1000) {
+    const token = jwt.sign({ id: id }, process.env.SECRET as string, {
+      expiresIn: '1min',
+    });
+    console.log('ccc', token);
+    return token;
+  } else {
+    throw new Error('refresh Token is expired');
+  }
+};
 
 interface Payload {
   id: string;
