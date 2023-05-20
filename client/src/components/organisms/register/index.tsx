@@ -13,6 +13,7 @@ import { routes } from '../../../router/routes';
 import { registerValidationSchema } from '../../../validation/registerFormSchema';
 import { useNavigate } from 'react-router-dom';
 import { usePostUser } from '../../../shared/hooks/user';
+import { useState } from 'react';
 
 interface LoginInitialValues {
   name: string;
@@ -25,6 +26,8 @@ const Register = () => {
   const navigate = useNavigate();
 
   const { mutateAsync } = usePostUser();
+
+  const [isShown, setIsShown] = useState(false);
 
   const initialValues: LoginInitialValues = {
     name: '',
@@ -69,7 +72,10 @@ const Register = () => {
               </Input>
               <FormError name="email" />
               <Input
-                type="password"
+                type={isShown ? 'text' : 'password'}
+                className={isShown ? 'input__text' : 'input__password'}
+                isPassowrdIcon={true}
+                onToggle={() => setIsShown(!isShown)}
                 name="password"
                 onChange={handleChange}
                 value={values.password}
@@ -78,7 +84,10 @@ const Register = () => {
               </Input>
               <FormError name="password" />
               <Input
-                type="password"
+                type={isShown ? 'text' : 'password'}
+                className={isShown ? 'input__text' : 'input__password'}
+                isPassowrdIcon={true}
+                onToggle={() => setIsShown(!isShown)}
                 name="confirmPassword"
                 onChange={handleChange}
                 value={values.confirmPassword}
