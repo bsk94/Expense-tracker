@@ -4,12 +4,16 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 interface Tokens {
-  token?: string;
-  refreshToken?: string;
+  token: string;
+  refreshToken: string;
 }
 
 export const register = async (req: Request) => {
   const { name, email, password, confirmPassword } = req.body;
+
+  if (!email || !password || !name) {
+    throw new Error('Please provide name, email and password');
+  }
 
   const newUser = new UserModel({
     name: name,
@@ -28,8 +32,11 @@ export const login = async (req: Request) => {
     throw new Error('Please provide email and password');
   }
 
-  const user =
-    (await UserModel.findOne({ email }).select('+password')) || new UserModel();
+  const user = await UserModel.findOne({ email }).select('+password');
+
+  if (!user) {
+    throw new Error('User cannot be found in the database');
+  }
 
   const result = await bcrypt.compare(password, user.password);
   if (!result) {
@@ -37,17 +44,16 @@ export const login = async (req: Request) => {
   }
 
   const token = jwt.sign({ id: user?._id }, process.env.SECRET as string, {
-    expiresIn: '20min',
+    expiresIn: '1min',
   });
 
   const refreshToken = jwt.sign(
     { id: user?._id },
     process.env.REFRESH_SECRET as string,
     {
-      expiresIn: '180min',
+      expiresIn: '1min',
     }
   );
-  console.log('hhh', refreshToken);
 
   return { token, refreshToken } as Tokens;
 };
@@ -56,18 +62,16 @@ export const refreshToken = async (req: Request) => {
   const refreshToken = req.body.refreshToken;
 
   const { id, exp } = (jwt.decode(refreshToken) as Payload) || {};
-  console.log(id);
-  console.log(exp);
 
   const dateNow = new Date();
   if (exp > dateNow.getTime() / 1000) {
     const token = jwt.sign({ id: id }, process.env.SECRET as string, {
       expiresIn: '1min',
     });
-    console.log('ccc', token);
+
     return token;
   } else {
-    throw new Error('refresh Token is expired');
+    throw new Error('Refresh Token is expired');
   }
 };
 

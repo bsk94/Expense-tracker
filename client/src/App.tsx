@@ -34,8 +34,6 @@ axios.interceptors.response.use(
 
     if (originalConfig.url !== 'http://localhost:4000/user/login' && err.response) {
       if (err.response.status === 401 && !originalConfig._retry) {
-        //  originalConfig._retry = true;
-
         try {
           const resp = await axios.post('http://localhost:4000/user/refreshtoken', {
             refreshToken: getRefreshToken()

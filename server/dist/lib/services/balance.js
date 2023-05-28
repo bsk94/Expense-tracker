@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBalance = void 0;
 const Finance_1 = require("../models/Finance");
 const getBalance = () => __awaiter(void 0, void 0, void 0, function* () {
-    const expense = yield Finance_1.FinanceModel.aggregate([
-        { $match: { financeType: 'expense' } },
+    var _a, _b;
+    const result = yield Finance_1.FinanceModel.aggregate([
         {
             $group: {
                 _id: '$financeType',
@@ -23,18 +23,9 @@ const getBalance = () => __awaiter(void 0, void 0, void 0, function* () {
             },
         },
     ]);
-    const revenue = yield Finance_1.FinanceModel.aggregate([
-        { $match: { financeType: 'revenue' } },
-        {
-            $group: {
-                _id: '$financeType',
-                total: {
-                    $sum: '$amount',
-                },
-            },
-        },
-    ]);
-    const totalBalance = revenue[0].total - expense[0].total;
+    const revenue = (_a = result.find((item) => item._id === 'revenue')) === null || _a === void 0 ? void 0 : _a.total;
+    const expense = (_b = result.find((item) => item._id === 'expense')) === null || _b === void 0 ? void 0 : _b.total;
+    const totalBalance = revenue - expense;
     if (!totalBalance) {
         throw Error('Error while fetching balance from database');
     }

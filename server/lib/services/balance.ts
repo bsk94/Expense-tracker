@@ -3,8 +3,7 @@ import { Request, Response } from 'express';
 import { FinanceModel } from '../models/Finance';
 
 export const getBalance = async () => {
-  const expense = await FinanceModel.aggregate([
-    { $match: { financeType: 'expense' } },
+  const result = await FinanceModel.aggregate([
     {
       $group: {
         _id: '$financeType',
@@ -15,19 +14,10 @@ export const getBalance = async () => {
     },
   ]);
 
-  const revenue = await FinanceModel.aggregate([
-    { $match: { financeType: 'revenue' } },
-    {
-      $group: {
-        _id: '$financeType',
-        total: {
-          $sum: '$amount',
-        },
-      },
-    },
-  ]);
+  const revenue = result.find((item) => item._id === 'revenue')?.total;
+  const expense = result.find((item) => item._id === 'expense')?.total;
 
-  const totalBalance = revenue[0].total - expense[0].total;
+  const totalBalance = revenue - expense;
 
   if (!totalBalance) {
     throw Error('Error while fetching balance from database');

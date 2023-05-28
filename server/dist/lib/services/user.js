@@ -18,6 +18,9 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const register = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password, confirmPassword } = req.body;
+    if (!email || !password || !name) {
+        throw new Error('Please provide name, email and password');
+    }
     const newUser = new User_1.UserModel({
         name: name,
         email: email,
@@ -32,36 +35,35 @@ const login = (req) => __awaiter(void 0, void 0, void 0, function* () {
     if (!email || !password) {
         throw new Error('Please provide email and password');
     }
-    const user = (yield User_1.UserModel.findOne({ email }).select('+password')) || new User_1.UserModel();
+    const user = yield User_1.UserModel.findOne({ email }).select('+password');
+    if (!user) {
+        throw new Error('User cannot be found in the database');
+    }
     const result = yield bcryptjs_1.default.compare(password, user.password);
     if (!result) {
         throw new Error('Please provide email and password');
     }
     const token = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.SECRET, {
-        expiresIn: '20min',
+        expiresIn: '1min',
     });
     const refreshToken = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.REFRESH_SECRET, {
-        expiresIn: '180min',
+        expiresIn: '1min',
     });
-    console.log('hhh', refreshToken);
     return { token, refreshToken };
 });
 exports.login = login;
 const refreshToken = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const refreshToken = req.body.refreshToken;
     const { id, exp } = jsonwebtoken_1.default.decode(refreshToken) || {};
-    console.log(id);
-    console.log(exp);
     const dateNow = new Date();
     if (exp > dateNow.getTime() / 1000) {
         const token = jsonwebtoken_1.default.sign({ id: id }, process.env.SECRET, {
             expiresIn: '1min',
         });
-        console.log('ccc', token);
         return token;
     }
     else {
-        throw new Error('refresh Token is expired');
+        throw new Error('Refresh Token is expired');
     }
 });
 exports.refreshToken = refreshToken;
