@@ -32,12 +32,19 @@ const Login = () => {
   const [isShown, setIsShown] = useState(false);
 
   const { mutateAsync } = useAuth();
-
-  const handleOnSubmit = async (values: LoginInitialValues, { resetForm }: { resetForm: any }) => {
+  // { resetForm }: { resetForm: any }
+  const handleOnSubmit = async (values: LoginInitialValues, { setErrors }: { setErrors: any }) => {
     console.log(values);
-    await mutateAsync(values);
-    resetForm();
-    dispatch(setAuth(true));
+    try {
+      await mutateAsync(values);
+      // resetForm();
+      dispatch(setAuth(true));
+    } catch (e) {
+      console.log('wrong pass');
+      setErrors({
+        password: 'Password or email is incorrect'
+      });
+    }
   };
 
   if (isUser) {
@@ -49,7 +56,7 @@ const Login = () => {
       initialValues={initialValues}
       validationSchema={loginValidationSchema}
       onSubmit={handleOnSubmit}>
-      {({ values, handleChange }) => (
+      {({ values, handleChange, status }) => (
         <StyledContainer>
           <StyledForm>
             <h1>Log in</h1>
@@ -74,6 +81,11 @@ const Login = () => {
                 placeholder=" ">
                 password
               </Input>
+              {status && status.password ? (
+                <div>API Error: {status.password}</div>
+              ) : (
+                <FormError name="password" />
+              )}
               <FormError name="password" />
             </StyledInputs>
             <Button type="submit" className="formLogin__btn--login">

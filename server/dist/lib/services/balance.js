@@ -23,14 +23,9 @@ const getBalance = () => __awaiter(void 0, void 0, void 0, function* () {
             },
         },
     ]);
-    const revenue = (_a = result.find((item) => item._id === 'revenue')) === null || _a === void 0 ? void 0 : _a.total;
-    const expense = (_b = result.find((item) => item._id === 'expense')) === null || _b === void 0 ? void 0 : _b.total;
+    const revenue = ((_a = result.find((item) => item._id === 'revenue')) === null || _a === void 0 ? void 0 : _a.total) || 0;
+    const expense = ((_b = result.find((item) => item._id === 'expense')) === null || _b === void 0 ? void 0 : _b.total) || 0;
     const totalBalance = revenue - expense;
-    if (!totalBalance) {
-        throw Error('Error while fetching balance from database');
-    }
-    else {
-        return totalBalance;
-    }
+    return totalBalance;
 });
 exports.getBalance = getBalance;

@@ -44,14 +44,14 @@ export const login = async (req: Request) => {
   }
 
   const token = jwt.sign({ id: user?._id }, process.env.SECRET as string, {
-    expiresIn: '1min',
+    expiresIn: '10min',
   });
 
   const refreshToken = jwt.sign(
     { id: user?._id },
     process.env.REFRESH_SECRET as string,
     {
-      expiresIn: '1min',
+      expiresIn: '10min',
     }
   );
 
@@ -66,7 +66,7 @@ export const refreshToken = async (req: Request) => {
   const dateNow = new Date();
   if (exp > dateNow.getTime() / 1000) {
     const token = jwt.sign({ id: id }, process.env.SECRET as string, {
-      expiresIn: '1min',
+      expiresIn: '10min',
     });
 
     return token;

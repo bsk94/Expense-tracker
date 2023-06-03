@@ -13,9 +13,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setAuth: (state, action) => {
-      console.log('ggg', action.payload);
-      console.log('vvvv', state.isUser);
       state.isUser = action.payload;
+      console.log('vvvv', state.isUser);
     }
   }
 });

@@ -4,5 +4,5 @@ YupPassword(Yup);
 
 export const loginValidationSchema = Yup.object().shape({
   email: Yup.string().required('Enter email').email('Email is not valid'),
-  password: Yup.string().password().required('Enter password')
+  password: Yup.string().required('Enter password')
 });

@@ -44,10 +44,10 @@ const login = (req) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error('Please provide email and password');
     }
     const token = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.SECRET, {
-        expiresIn: '1min',
+        expiresIn: '10min',
     });
     const refreshToken = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.REFRESH_SECRET, {
-        expiresIn: '1min',
+        expiresIn: '10min',
     });
     return { token, refreshToken };
 });
@@ -58,7 +58,7 @@ const refreshToken = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const dateNow = new Date();
     if (exp > dateNow.getTime() / 1000) {
         const token = jsonwebtoken_1.default.sign({ id: id }, process.env.SECRET, {
-            expiresIn: '1min',
+            expiresIn: '10min',
         });
         return token;
     }

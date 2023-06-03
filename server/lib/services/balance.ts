@@ -14,14 +14,10 @@ export const getBalance = async () => {
     },
   ]);
 
-  const revenue = result.find((item) => item._id === 'revenue')?.total;
-  const expense = result.find((item) => item._id === 'expense')?.total;
+  const revenue = result.find((item) => item._id === 'revenue')?.total || 0;
+  const expense = result.find((item) => item._id === 'expense')?.total || 0;
 
   const totalBalance = revenue - expense;
 
-  if (!totalBalance) {
-    throw Error('Error while fetching balance from database');
-  } else {
-    return totalBalance;
-  }
+  return totalBalance;
 };
