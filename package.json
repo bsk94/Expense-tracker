@@ -8,6 +8,7 @@
     "client": "(cd ./client && npm run start) ",
     "server": "(cd ./server && npm run dev) ",
     "start": "concurrently -n 'client,server'  \"npm run client\" \"npm run server\" ",
+    "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
