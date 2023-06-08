@@ -17,7 +17,7 @@ const User_1 = require("../models/User");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const register = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password } = req.body;
     if (!email || !password || !name) {
         throw new Error('Please provide name, email and password');
     }
@@ -26,6 +26,10 @@ const register = (req) => __awaiter(void 0, void 0, void 0, function* () {
         email: email,
         password: password,
     });
+    // const findOneEmail = await newUser.findOne( email)
+    // if (findOneEmail) {
+    //   return next(AppError("This email already used"));
+    // }
     const userCreated = yield newUser.save();
     return userCreated;
 });
@@ -47,7 +51,7 @@ const login = (req) => __awaiter(void 0, void 0, void 0, function* () {
         expiresIn: '10min',
     });
     const refreshToken = jsonwebtoken_1.default.sign({ id: user === null || user === void 0 ? void 0 : user._id }, process.env.REFRESH_SECRET, {
-        expiresIn: '10min',
+        expiresIn: '1h',
     });
     return { token, refreshToken };
 });
@@ -58,7 +62,7 @@ const refreshToken = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const dateNow = new Date();
     if (exp > dateNow.getTime() / 1000) {
         const token = jsonwebtoken_1.default.sign({ id: id }, process.env.SECRET, {
-            expiresIn: '10min',
+            expiresIn: '1h',
         });
         return token;
     }

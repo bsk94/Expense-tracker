@@ -9,7 +9,7 @@ interface Tokens {
 }
 
 export const register = async (req: Request) => {
-  const { name, email, password, confirmPassword } = req.body;
+  const { name, email, password } = req.body;
 
   if (!email || !password || !name) {
     throw new Error('Please provide name, email and password');
@@ -21,7 +21,13 @@ export const register = async (req: Request) => {
     password: password,
   });
 
+  // const findOneEmail = await newUser.findOne( email)
+  // if (findOneEmail) {
+  //   return next(AppError("This email already used"));
+  // }
+
   const userCreated = await newUser.save();
+
   return userCreated;
 };
 
@@ -51,7 +57,7 @@ export const login = async (req: Request) => {
     { id: user?._id },
     process.env.REFRESH_SECRET as string,
     {
-      expiresIn: '10min',
+      expiresIn: '1h',
     }
   );
 
@@ -66,7 +72,7 @@ export const refreshToken = async (req: Request) => {
   const dateNow = new Date();
   if (exp > dateNow.getTime() / 1000) {
     const token = jwt.sign({ id: id }, process.env.SECRET as string, {
-      expiresIn: '10min',
+      expiresIn: '1h',
     });
 
     return token;

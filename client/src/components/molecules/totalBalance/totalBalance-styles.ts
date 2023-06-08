@@ -3,7 +3,7 @@ import { media } from '../../../globalStyles/mediaQueries';
 
 export const StyledTotalBalance = styled.div`
   background-color: ${({ theme }) => theme.colors.lightest};
-  width: 95%;
+  width: 100%;
   max-width: 57rem;
   height: 22vh;
   border-radius: 10px;
@@ -11,9 +11,14 @@ export const StyledTotalBalance = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 5rem 0rem;
 
   ${media.mobile} {
     background-color: ${({ theme }) => theme.colors.lightGreen};
+    margin: 2rem 0rem 5rem 0rem;
+  }
+  ${media.mobileS} {
+    margin: 0rem 0rem 1rem 0rem;
   }
 
   span {

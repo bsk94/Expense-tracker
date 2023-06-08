@@ -24,6 +24,7 @@ export const StyledConatiner = styled.div`
   max-width: 57rem;
   display: flex;
   flex-direction: column;
+  margin-top: 5%;
 `;
 
 export const StyledParagraf = styled.span`

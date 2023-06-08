@@ -19,5 +19,9 @@ export const getBalance = async () => {
 
   const totalBalance = revenue - expense;
 
-  return totalBalance;
+  if (!result) {
+    throw Error('Error while fetching balance from database');
+  } else {
+    return totalBalance;
+  }
 };

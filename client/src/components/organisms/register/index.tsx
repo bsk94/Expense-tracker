@@ -36,11 +36,17 @@ const Register = () => {
     confirmPassword: ''
   };
 
-  const handleOnSubmit = async (values: LoginInitialValues, { resetForm }: { resetForm: any }) => {
+  const handleOnSubmit = async (values: LoginInitialValues, { setErrors }: { setErrors: any }) => {
     console.log(values);
-    await mutateAsync(values);
-    resetForm();
-    navigate('/login');
+
+    try {
+      await mutateAsync(values);
+      navigate('/login');
+    } catch (e) {
+      setErrors({
+        email: 'Email is already taken'
+      });
+    }
   };
 
   return (
@@ -48,7 +54,7 @@ const Register = () => {
       initialValues={initialValues}
       validationSchema={registerValidationSchema}
       onSubmit={handleOnSubmit}>
-      {({ values, handleChange }) => (
+      {({ values, handleChange, status }) => (
         <StyledContainer>
           <StyledForm>
             <h1>Register</h1>

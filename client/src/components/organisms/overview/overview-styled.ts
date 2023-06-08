@@ -7,6 +7,7 @@ export const StyledOverviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 
   ${media.mobile} {
     background-color: ${({ theme }) => theme.colors.lightest};

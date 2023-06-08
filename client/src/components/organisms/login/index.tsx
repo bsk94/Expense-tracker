@@ -56,7 +56,7 @@ const Login = () => {
       initialValues={initialValues}
       validationSchema={loginValidationSchema}
       onSubmit={handleOnSubmit}>
-      {({ values, handleChange, status }) => (
+      {({ values, handleChange }) => (
         <StyledContainer>
           <StyledForm>
             <h1>Log in</h1>
@@ -81,11 +81,6 @@ const Login = () => {
                 placeholder=" ">
                 password
               </Input>
-              {status && status.password ? (
-                <div>API Error: {status.password}</div>
-              ) : (
-                <FormError name="password" />
-              )}
               <FormError name="password" />
             </StyledInputs>
             <Button type="submit" className="formLogin__btn--login">
