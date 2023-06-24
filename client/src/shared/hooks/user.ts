@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from '../../utils/axiosConfig';
 
 const addUser = async (payload: any) =>
   await axios.post('http://localhost:4000/user/register', payload);

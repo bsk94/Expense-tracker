@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { userService } from '../services';
+import { error } from 'console';
 
 export const register = async (req: Request, res: Response) => {
   console.log(req.body);
@@ -7,8 +8,8 @@ export const register = async (req: Request, res: Response) => {
     const userCreated = await userService.register(req);
 
     return res.status(200).json({ success: true, userCreated });
-  } catch (err) {
-    res.status(500).json({ err });
+  } catch (err: any) {
+    res.status(500).send(err.message);
   }
 };
 

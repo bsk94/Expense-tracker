@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from '../../utils/axiosConfig';
 import { ExpenseItem } from '../types';
 import { RevenueItem } from '../../shared/types';
 import { useInfiniteQuery } from '@tanstack/react-query';

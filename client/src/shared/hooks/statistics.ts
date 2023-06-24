@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from '../../utils/axiosConfig';
 
 const fetchFinanceStatistics = async (dates: string) =>
   await axios.get(`http://localhost:4000/statistics/expense/${dates}`).then((resp) => resp.data);

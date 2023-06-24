@@ -17,7 +17,9 @@ const addFinance = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(200).send({ data: financeCreated });
     }
     catch (err) {
-        return res.status(500).send(`Internal server error, ${err.message}`);
+        return res
+            .status(500)
+            .send('Internal server error, please contact support');
     }
 });
 exports.addFinance = addFinance;

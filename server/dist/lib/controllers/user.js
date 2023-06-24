@@ -18,7 +18,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(200).json({ success: true, userCreated });
     }
     catch (err) {
-        res.status(500).json({ err });
+        res.status(500).send(err.message);
     }
 });
 exports.register = register;

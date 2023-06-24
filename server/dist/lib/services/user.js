@@ -26,9 +26,9 @@ const register = (req) => __awaiter(void 0, void 0, void 0, function* () {
         email: email,
         password: password,
     });
-    // const findOneEmail = await newUser.findOne( email)
+    // const findOneEmail = await newUser.findOne(email)
     // if (findOneEmail) {
-    //   return next(AppError("This email already used"));
+    //   throw new Error('Please provide name, email and password');
     // }
     const userCreated = yield newUser.save();
     return userCreated;

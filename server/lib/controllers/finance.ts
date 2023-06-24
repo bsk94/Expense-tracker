@@ -7,7 +7,9 @@ export const addFinance = async (req: Request, res: Response) => {
 
     return res.status(200).send({ data: financeCreated });
   } catch (err: any) {
-    return res.status(500).send(`Internal server error, ${err.message}`);
+    return res
+      .status(500)
+      .send('Internal server error, please contact support');
   }
 };
 

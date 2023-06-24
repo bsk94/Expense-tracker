@@ -21,9 +21,9 @@ export const register = async (req: Request) => {
     password: password,
   });
 
-  // const findOneEmail = await newUser.findOne( email)
+  // const findOneEmail = await newUser.findOne(email)
   // if (findOneEmail) {
-  //   return next(AppError("This email already used"));
+  //   throw new Error('Please provide name, email and password');
   // }
 
   const userCreated = await newUser.save();
