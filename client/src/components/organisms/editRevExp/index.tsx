@@ -71,7 +71,7 @@ const EditExpenseRevenue = () => {
         }}>
         {({ values, handleChange }) => (
           <StyledForm>
-            <h2>Edition</h2>
+            <h2>Edit entry</h2>
             <StyledInputs>
               <Input
                 type="text"
@@ -105,7 +105,7 @@ const EditExpenseRevenue = () => {
               <Field name="category" component={Category} chosen={chosen} setChosen={setChosen} />
             ) : null}
             <Button type="submit" className="formExp__btn--add">
-              Add
+              Edit
             </Button>
           </StyledForm>
         )}
