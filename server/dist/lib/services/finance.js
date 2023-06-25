@@ -42,8 +42,8 @@ const getFinance = (req) => __awaiter(void 0, void 0, void 0, function* () {
     }
     if (dates) {
         const datesFormatted = dates.split(',');
-        const startDate = new Date(datesFormatted[0]).toISOString().slice(0, 10);
-        const endDate = new Date(datesFormatted[1]).toISOString().slice(0, 10);
+        const startDate = new Date(datesFormatted[0]).toISOString().split('T')[0];
+        const endDate = new Date(datesFormatted[1]).toISOString().split('T')[0];
         query = Object.assign(Object.assign({}, query), { date: {
                 $gte: startDate,
                 $lte: endDate,
