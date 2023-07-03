@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios';
 import { getToken, getRefreshToken, removeTokens } from './auth';
 import { setAuth } from '../features/authSlice';
 import store from '../app/store';
@@ -26,12 +26,12 @@ axios.interceptors.response.use(
   async (err) => {
     const originalConfig = err.config;
 
-    if (originalConfig.url !== 'http://localhost:4000/user/login' && err.response) {
+    if (originalConfig.url !== '/user/login' && err.response) {
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
 
         try {
-          const resp = await axios.post('http://localhost:4000/user/refreshtoken', {
+          const resp = await axios.post('/user/refreshtoken', {
             refreshToken: getRefreshToken()
           });
 

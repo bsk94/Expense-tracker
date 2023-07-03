@@ -1,6 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 import { userService } from '../services';
 import { error } from 'console';
+// const catchAsync = (
+//   fn: (req: Request, res: Response, next: NextFunction) => any
+// ) => {
+//   return (req: Request, res: Response, next: NextFunction) => {
+//     fn(req, res, next).catch(next);
+//   };
+// };
+
+// const asyncHandler =
+//   (fn: any) => (req: Request, res: Response, next: NextFunction) =>
+//     Promise.resolve(fn(req, res, next)).catch(next);
 
 export const register = async (req: Request, res: Response) => {
   console.log(req.body);

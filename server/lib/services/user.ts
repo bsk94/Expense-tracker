@@ -21,10 +21,10 @@ export const register = async (req: Request) => {
     password: password,
   });
 
-  // const findOneEmail = await newUser.findOne(email)
-  // if (findOneEmail) {
-  //   throw new Error('Please provide name, email and password');
-  // }
+  const findOneEmail = await UserModel.findOne({ email });
+  if (findOneEmail) {
+    throw new Error('Email already exists');
+  }
 
   const userCreated = await newUser.save();
 

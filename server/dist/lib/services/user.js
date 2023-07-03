@@ -26,10 +26,10 @@ const register = (req) => __awaiter(void 0, void 0, void 0, function* () {
         email: email,
         password: password,
     });
-    // const findOneEmail = await newUser.findOne(email)
-    // if (findOneEmail) {
-    //   throw new Error('Please provide name, email and password');
-    // }
+    const findOneEmail = yield User_1.UserModel.findOne({ email });
+    if (findOneEmail) {
+        throw new Error('Email already exists');
+    }
     const userCreated = yield newUser.save();
     return userCreated;
 });
